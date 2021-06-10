@@ -30,15 +30,19 @@ class SceneObject extends ObjectManager<Component> {
   }
 
   double getCenteredPositionX() {
-    return _position.x; // + (width / 2.0);
+    return _position.x;
   }
 
   double getCenteredPositionY() {
-    return _position.y; // + (height / 2.0);
+    return _position.y;
   }
 
   void spawn() {
     getAdditionsArray().forEach((element) => element.spawn(this));
+  }
+
+  void hide() {
+    _visible = false;
   }
 
   void destroy() {
@@ -47,6 +51,6 @@ class SceneObject extends ObjectManager<Component> {
 
   @override
   String toString() {
-    return 'SceneObject{ position:$_position width:$width height:$height }';
+    return 'SceneObject{ position:$_position width:$width height:$height body:${getAdditionsArray()}}';
   }
 }

@@ -21,7 +21,11 @@ class RenderSystem with Registry {
       bool cameraRelative = true}) {
     // DrawableObject
     if (drawable is DrawableObject) {
-      drawObject(drawable: drawable, position: position, priority: priority);
+      drawObject(
+          drawable: drawable,
+          position: position,
+          priority: priority,
+          cameraRelative: cameraRelative);
     }
     // DrawableText
     else if (drawable is DrawableText) {
@@ -95,9 +99,9 @@ class RenderSystem with Registry {
         _batch.drawRenderElement(element);
       } else if (element is TextElement) {
         //TODO
-        //_batch.endBatch();
+        _batch.endBatch();
         element.paint(canvas);
-        //_batch.beginBatch(canvas);
+        _batch.beginBatch(canvas);
       }
     });
     _batch.endBatch();

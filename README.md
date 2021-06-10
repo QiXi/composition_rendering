@@ -2,6 +2,10 @@ A tool for creating objects based on composition and painting on canvas. It can 
 
 Drawing is based on canvas.drawRawAtlas
 
+## Demo
+[![example scene](http://img.youtube.com/vi/s7eeh_UWTsI/0.jpg)](http://www.youtube.com/watch?v=s7eeh_UWTsI)
+
+
 ## History of creation
 
 The source of inspiration was the resource [Replica Island](https://code.google.com/archive/p/replicaisland/)

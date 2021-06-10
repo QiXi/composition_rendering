@@ -21,10 +21,6 @@ class FactorySystem with Registry {
     return SceneObject()..add(renderComponent)..add(spriteComponent);
   }
 
-  SceneObject spawnSpriteFromImage(Image image, int priority) {
-    return spawnSprite(TextureRegion(Texture(image)), priority);
-  }
-
   List<TextureRegion> spawnTextureRegionsFromLine(
       {required String fileName, required int tileSize, required int count}) {
     final regions = <TextureRegion>[];
