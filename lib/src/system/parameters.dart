@@ -5,6 +5,7 @@ class Parameters {
   late double _viewHalfWidth;
   late double _viewHeight;
   late double _viewHalfHeight;
+  late Rect viewRect;
 
   double gameWidth;
   double gameHeight;
@@ -14,8 +15,7 @@ class Parameters {
       {double viewWidth = 0, double viewHeight = 0, this.gameWidth = 1000, this.gameHeight = 1000})
       : worldBounds =
             Rect.fromLTRB(-gameWidth / 2.0, -gameHeight / 2.0, gameWidth / 2.0, gameHeight / 2.0) {
-    this.viewWidth = viewWidth;
-    this.viewHeight = viewHeight;
+    setViewSize(viewWidth, viewHeight);
   }
 
   double get viewWidth => _viewWidth;
@@ -26,14 +26,12 @@ class Parameters {
 
   double get viewHalfHeight => _viewHalfHeight;
 
-  set viewWidth(double width) {
+  void setViewSize(double width, double height) {
     _viewWidth = width;
     _viewHalfWidth = width / 2.0;
-  }
-
-  set viewHeight(double height) {
     _viewHeight = height;
     _viewHalfHeight = height / 2.0;
+    viewRect = Rect.fromLTRB(-_viewHalfWidth, -viewHalfHeight, _viewHalfWidth, viewHalfHeight);
   }
 
   @override

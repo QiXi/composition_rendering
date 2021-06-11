@@ -24,7 +24,6 @@ class CameraSystem with Registry {
   }
 
   void setTarget(SceneObject target, {useWorldBounds = true}) {
-    //print('setTarget $target');
     if (_target != target) {
       _useWorldBounds = useWorldBounds;
       _preInterpolateCameraPosition.setFrom(_currentCameraPosition);
@@ -43,10 +42,13 @@ class CameraSystem with Registry {
 
   Vector2 get focusPosition => _focalPosition;
 
+  Vector2 get cameraPosition => _currentCameraPosition;
+
   void update(double deltaTime) {
     _currentTime += deltaTime;
     if (_target != null) {
       _targetPosition.setValues(_target!.getCenteredPositionX(), _target!.getCenteredPositionY());
+      // extra time to reach the end point
       if (_targetTime > _currentTime - 0.05) {
         final delta = _currentTime - (_targetTime - interpolateToTargetTime);
         _currentCameraPosition.x = Lerp.ease(
@@ -57,16 +59,18 @@ class CameraSystem with Registry {
         _currentCameraPosition.setFrom(_targetPosition);
       }
       if (_useWorldBounds) {
-        applyBounds(_currentCameraPosition, _currentCameraPosition);
+        applyBounds(_focalPosition, _currentCameraPosition);
+      } else {
+        _focalPosition.setFrom(_currentCameraPosition);
       }
     }
-    _focalPosition.setFrom(_currentCameraPosition);
   }
 
   void applyBounds(Vector2 focalPosition, Vector2 cameraPosition) {
-    final worldBounds = systems.parameters.worldBounds;
-    final hw = systems.parameters.viewHalfWidth;
-    final hh = systems.parameters.viewHalfHeight;
+    final params = systems.parameters;
+    final worldBounds = params.worldBounds;
+    final hw = params.viewHalfWidth;
+    final hh = params.viewHalfHeight;
     if (cameraPosition.x + hw > worldBounds.right) {
       focalPosition.x = worldBounds.right - hw;
     } else if (cameraPosition.x - hw < worldBounds.left) {
@@ -77,21 +81,16 @@ class CameraSystem with Registry {
     } else if (cameraPosition.y + hh > worldBounds.bottom) {
       focalPosition.y = worldBounds.bottom - hh;
     }
-    /*var w = worldBounds.right - hw;
-    var h = worldBounds.bottom - hh;
-    var length2 = w * w + h * h;
-    if (cameraPosition.length2 > length2) {
-      var angle = atan2(cameraPosition.y, cameraPosition.x);
-      var x = w * cos(angle);
-      var y = h * sin(angle);
-      focalPosition.setValues(x, y);
-    } else {
-      focusPosition.setFrom(cameraPosition);
-    }*/
+  }
+
+  bool visibleAtPosition(Vector2 position) {
+    final x = position.x - _focalPosition.x;
+    final y = position.y - _focalPosition.y;
+    return coordinatesInRect(x, y, systems.parameters.viewRect);
   }
 
   @override
   String toString() {
-    return '[CameraSystem] currentPosition:$_currentCameraPosition targetPosition:$_targetPosition';
+    return '[CameraSystem] position:$_currentCameraPosition targetPosition:$_targetPosition';
   }
 }
