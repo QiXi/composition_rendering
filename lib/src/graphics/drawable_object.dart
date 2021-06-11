@@ -11,7 +11,7 @@ const int itx = 2;
 const int ity = 3;
 
 class DrawableObject extends Drawable {
-  // scos, ssin, tx, ty
+  // [scos, ssin, tx, ty]
   final Float32List data = Float32List(4);
   TextureRegion? textureRegion;
   int? color;
@@ -81,6 +81,6 @@ class DrawableObject extends Drawable {
 
   @override
   String toString() {
-    return 'DrawableObject{ textureRegion:$textureRegion data:$data} [$hashCode]';
+    return 'DrawableObject{ textureRegion:$textureRegion data:$data [$hashCode]}';
   }
 }

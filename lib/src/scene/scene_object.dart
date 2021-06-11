@@ -51,6 +51,6 @@ class SceneObject extends ObjectManager<Component> {
 
   @override
   String toString() {
-    return 'SceneObject{ position:$_position width:$width height:$height body:${getAdditionsArray()}}';
+    return 'SceneObject{ position:$_position width:$width height:$height additions:${getAdditionsArray()} [$hashCode]}';
   }
 }

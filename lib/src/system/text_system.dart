@@ -58,6 +58,6 @@ class TextElement extends PhasedObject {
 
   @override
   String toString() {
-    return '\nTextElement{ text:${textPainter.text} dx:$dx dy:$dy }';
+    return '\nTextElement{ text:${textPainter.text} dx:$dx dy:$dy [$hashCode]}';
   }
 }

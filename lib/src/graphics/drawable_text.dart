@@ -6,9 +6,9 @@ import 'drawable.dart';
 class DrawableText extends Drawable {
   TextPainter? textPainter;
 
-  bool get hasTextPainter => textPainter != null;
-
   DrawableText();
+
+  bool get hasTextPainter => textPainter != null;
 
   @override
   bool visibleAtPosition(Vector2 screenLocation) {

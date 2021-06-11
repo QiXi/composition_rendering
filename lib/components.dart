@@ -1,6 +1,5 @@
 export 'src/components/component.dart';
 export 'src/components/mixins/draw_offset.dart';
-export 'src/components/mixins/drawable_body.dart';
 export 'src/components/mixins/sprite_body.dart';
 export 'src/components/render_component.dart';
 export 'src/components/render_list_component.dart';

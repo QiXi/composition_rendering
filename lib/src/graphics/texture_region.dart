@@ -31,6 +31,6 @@ class TextureRegion {
 
   @override
   String toString() {
-    return 'TextureRegion{ rect[${rect.left},${rect.top},${rect.width},${rect.height}] anchor[$anchorX,$anchorY]}';
+    return 'TextureRegion{ rect[${rect.left},${rect.top},${rect.width},${rect.height}] anchor[$anchorX,$anchorY] [$hashCode]}';
   }
 }

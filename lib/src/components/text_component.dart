@@ -5,23 +5,21 @@ import '../graphics/colors.dart';
 import '../graphics/drawable_text.dart';
 
 class TextComponent extends Component with Dirty {
-  final RenderComponent renderComponent;
-  final _textStyle;
-  late final TextPainter _textPainter;
-  String _text;
+  static final TextStyle defaultTextStyle = TextStyle(
+    color: Colors.whiteColor,
+    fontSize: 11,
+  );
+  final TextPainter _textPainter;
   final DrawableText _drawable;
+  var _textStyle;
+  String _text;
 
-  TextComponent(this._text, this.renderComponent, {TextStyle? style})
-      : _textStyle = style ??
-            TextStyle(
-              color: Colors.whiteColor,
-              fontSize: 11,
-            ),
+  TextComponent(this._text, RenderComponent renderComponent, {TextStyle? style})
+      : _textStyle = style ?? defaultTextStyle,
         _textPainter = TextPainter(textDirection: TextDirection.ltr),
         _drawable = DrawableText() {
     setPhase(ComponentPhases.preDraw);
-    _drawable.textPainter = _textPainter;
-    renderComponent.drawable = _drawable;
+    renderComponent.drawable = _drawable..textPainter = _textPainter;
   }
 
   set text(String text) {
@@ -35,7 +33,7 @@ class TextComponent extends Component with Dirty {
 
   @override
   void reset() {
-    _text = '';
+    text = '';
   }
 
   @override

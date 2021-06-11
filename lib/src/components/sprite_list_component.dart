@@ -50,11 +50,9 @@ class SpriteListComponent extends Component with SpriteBody {
         spriteDirty = false;
         for (var i = 0; i < _textureRegions.length; i++) {
           var drawable = _drawableList[i];
-          var textureRegion = getTextureRegion(i);
-          if (textureRegion != null) {
-            drawable.setData(
-                textureRegion: textureRegion, scale: scale, rotation: rotation, opacity: opacity);
-          }
+          var textureRegion = _textureRegions[i];
+          drawable.setData(
+              textureRegion: textureRegion, scale: scale, rotation: rotation, opacity: opacity);
         }
       }
     }
@@ -62,6 +60,6 @@ class SpriteListComponent extends Component with SpriteBody {
 
   @override
   String toString() {
-    return 'SpriteListComponent{[$hashCode]}';
+    return 'SpriteListComponent{ scale:$scale rotation:$rotation opacity:$opacity [$hashCode]}';
   }
 }

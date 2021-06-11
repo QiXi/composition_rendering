@@ -43,6 +43,6 @@ class SystemRegistry {
 
   @override
   String toString() {
-    return 'SystemRegistry{ $parameters [$hashCode] }';
+    return 'SystemRegistry{ $parameters [$hashCode]}';
   }
 }

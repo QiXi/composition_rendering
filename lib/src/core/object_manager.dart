@@ -2,52 +2,52 @@ import 'base_object.dart';
 import 'sorted_list.dart';
 
 class ObjectManager<T extends BaseObject> extends BaseObject {
-  final SortedList<T> _objectArray;
+  final SortedList<T> _objectList;
   final List<T> _pendingAdditions;
   final List<T> _pendingRemovals;
 
   ObjectManager()
-      : _objectArray = SortedList(),
+      : _objectList = SortedList(),
         _pendingAdditions = [],
         _pendingRemovals = [];
 
   @override
   void reset() {
     commitUpdates();
-    _objectArray.forEach((element) => element.reset());
-    _objectArray.clear();
+    _objectList.list.forEach((element) => element.reset());
+    _objectList.clear();
   }
 
   @override
   void update(double deltaTime, BaseObject parent) {
     commitUpdates();
-    _objectArray.forEach((element) => element.update(deltaTime, this));
+    _objectList.list.forEach((element) => element.update(deltaTime, this));
   }
 
   void commitUpdates() {
     if (_pendingAdditions.isNotEmpty) {
-      _pendingAdditions.forEach((element) => _objectArray.add(element));
+      _objectList.list.addAll(_pendingAdditions);
       _pendingAdditions.clear();
     }
     if (_pendingRemovals.isNotEmpty) {
-      _pendingRemovals.forEach((element) => _objectArray.remove(element));
+      _pendingRemovals.forEach((element) => _objectList.remove(element));
       _pendingRemovals.clear();
     }
   }
 
   int get count {
-    return _objectArray.count;
+    return _objectList.count;
   }
 
   int get concreteCount {
-    return _objectArray.count + _pendingAdditions.length - _pendingRemovals.length;
+    return _objectList.count + _pendingAdditions.length - _pendingRemovals.length;
   }
 
   T getAt(int index) {
-    return _objectArray.list[index];
+    return _objectList.list[index];
   }
 
-  SortedList<T> getObjects() => _objectArray;
+  SortedList<T> getObjects() => _objectList;
 
   List<T> getAdditionsArray() => _pendingAdditions;
 
@@ -61,11 +61,11 @@ class ObjectManager<T extends BaseObject> extends BaseObject {
 
   void removeAll() {
     _pendingAdditions.clear();
-    _objectArray.forEach((element) => _pendingRemovals.add(element));
+    _objectList.list.forEach((element) => _pendingRemovals.add(element));
   }
 
   E? findByType<E extends BaseObject>() {
-    var object = _findByType<E>(_objectArray.list);
+    var object = _findByType<E>(_objectList.list);
     object ??= _findByType<E>(_pendingAdditions);
     return object;
   }

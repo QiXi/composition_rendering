@@ -2,20 +2,20 @@ import '../../components.dart';
 import '../../graphics.dart';
 
 class SpriteComponent extends Component with SpriteBody {
-  final RenderComponent renderComponent;
+  final RenderComponent _renderComponent;
   final TextureRegion textureRegion;
   final DrawableObject _drawable;
 
   SpriteComponent(
     this.textureRegion,
-    this.renderComponent, {
+    this._renderComponent, {
     double rotation = 0.0,
     double scale = 1.0,
     double opacity = 1.0,
   }) : _drawable = DrawableObject() {
     setPhase(ComponentPhases.preDraw);
     setBody(rotation: rotation, scale: scale, opacity: opacity);
-    renderComponent.drawable = _drawable;
+    _renderComponent.drawable = _drawable;
   }
 
   @override
