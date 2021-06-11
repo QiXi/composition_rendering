@@ -26,8 +26,7 @@ class BatchData {
   int get freeCount => freeLength % 4;
 
   void fillToEnd() {
-    final index0 = _rectCount * 4;
-    rawSources.fillRange(index0, rawSources.length, 0);
+    rawSources.fillRange(currentIndex, rawSources.length, 0);
   }
 
   void fillOneUnit(Float32List rstTransforms, Float32List rect, int color, [int skipCount = 0]) {

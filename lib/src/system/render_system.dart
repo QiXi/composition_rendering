@@ -114,6 +114,11 @@ class RenderSystem with Registry {
     _renderQueue.reset();
     systems.debugSystem.stopRender();
   }
+
+  @override
+  String toString() {
+    return '[RenderSystem]';
+  }
 }
 
 class RenderElement extends PhasedObject {
@@ -139,7 +144,7 @@ class RenderElement extends PhasedObject {
 
   @override
   String toString() {
-    return '\nRenderElement{ phase:$phase data:$data $textureRegion color:$color }';
+    return '\nRenderElement{ phase:$phase data:$data $textureRegion color:$color [$hashCode]}';
   }
 }
 

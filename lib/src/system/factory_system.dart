@@ -24,7 +24,7 @@ class FactorySystem with Registry {
   List<TextureRegion> spawnTextureRegionsFromLine(
       {required String fileName, required int tileSize, required int count}) {
     final regions = <TextureRegion>[];
-    var image = systems.textureSystem.fromCache(fileName);
+    var image = systems.textureSystem.getImageFromCache(fileName);
     var left = 0;
     for (var i = 0; i < count; i++) {
       var rect = Rect.fromLTWH(left.toDouble(), 0, tileSize.toDouble(), tileSize.toDouble());
