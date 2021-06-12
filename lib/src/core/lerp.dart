@@ -2,7 +2,7 @@ import 'math.dart';
 
 class Lerp {
   static double lerp(double start, double target, double duration, double timeSinceStart) {
-    if (timeSinceStart > 0.0 && timeSinceStart < duration) {
+    if (timeSinceStart > 0 && timeSinceStart < duration) {
       final range = target - start;
       final percent = timeSinceStart / duration;
       return start + (range * percent);
@@ -13,7 +13,7 @@ class Lerp {
   }
 
   static double ease(double start, double target, double duration, double timeSinceStart) {
-    if (timeSinceStart > 0.0 && timeSinceStart < duration) {
+    if (timeSinceStart > 0 && timeSinceStart < duration) {
       final range = target - start;
       final percent = timeSinceStart / (duration / 2.0);
       if (percent < 1.0) {
@@ -29,44 +29,26 @@ class Lerp {
   }
 
   static double lerpRadians(double start, double target, double duration, double timeSinceStart) {
-    double result;
     final range = target - start;
     if (range < -pi) {
-      target += twoPi;
-      result = lerp(start, target, duration, timeSinceStart);
-      if (result >= twoPi) {
-        result -= twoPi;
-      }
+      var result = lerp(start, target + twoPi, duration, timeSinceStart);
+      return (result >= twoPi) ? result - twoPi : result;
     } else if (range > pi) {
-      target -= twoPi;
-      result = lerp(start, target, duration, timeSinceStart);
-      if (result < 0) {
-        result += twoPi;
-      }
-    } else {
-      result = lerp(start, target, duration, timeSinceStart);
+      var result = lerp(start, target - twoPi, duration, timeSinceStart);
+      return (result < 0) ? result + twoPi : result;
     }
-    return result;
+    return lerp(start, target, duration, timeSinceStart);
   }
 
   static double lerpDegrees(double start, double target, double duration, double timeSinceStart) {
-    double result;
     final range = target - start;
     if (range < -180) {
-      target += 360;
-      result = lerp(start, target, duration, timeSinceStart);
-      if (result >= 360) {
-        result -= 360;
-      }
+      var result = lerp(start, target + 360, duration, timeSinceStart);
+      return (result >= 360) ? result - 360 : result;
     } else if (range > 180) {
-      target -= 360;
-      result = lerp(start, target, duration, timeSinceStart);
-      if (result < 0) {
-        result += 360;
-      }
-    } else {
-      result = lerp(start, target, duration, timeSinceStart);
+      var result = lerp(start, target - 360, duration, timeSinceStart);
+      return (result < 0) ? result + 360 : result;
     }
-    return result;
+    return lerp(start, target, duration, timeSinceStart);
   }
 }
