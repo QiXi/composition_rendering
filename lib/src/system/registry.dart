@@ -12,7 +12,6 @@ class SystemRegistry {
 
   final Parameters parameters;
 
-  //
   final RenderSystem renderSystem;
   final UpdateSystem updateSystem;
   final FactorySystem factorySystem;
@@ -37,9 +36,7 @@ class SystemRegistry {
         textureSystem = textureSystem ?? TextureSystem(),
         cameraSystem = cameraSystem ?? CameraSystem(),
         textSystem = textSystem ?? TextSystem(),
-        debugSystem = debugSystem ?? DebugSystem() {
-    print('new $this');
-  }
+        debugSystem = debugSystem ?? DebugSystem();
 
   @override
   String toString() {

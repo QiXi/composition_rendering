@@ -10,7 +10,7 @@ class DebugSystem {
   double currentTime = 0;
   double nextDebugTime = 0;
 
-  bool debugMode = true;
+  bool debugMode = false;
 
   DebugSystem({String tag = 'main'}) : tag = tag;
 

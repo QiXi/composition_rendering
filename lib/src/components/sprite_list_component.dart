@@ -2,12 +2,11 @@ import '../../components.dart';
 import '../../graphics.dart';
 
 class SpriteListComponent extends Component with SpriteBody {
-  final List<TextureRegion> _textureRegions;
   final RenderListComponent _renderComponent;
+  final List<TextureRegion> _textureRegions;
   final List<DrawableObject> _drawableList;
 
   SpriteListComponent({
-    required int size,
     required List<TextureRegion> textureRegions,
     required RenderListComponent renderComponent,
     double rotation = 0.0,
@@ -18,7 +17,7 @@ class SpriteListComponent extends Component with SpriteBody {
         _textureRegions = textureRegions {
     setPhase(ComponentPhases.preDraw);
     setBody(rotation: rotation, scale: scale, opacity: opacity);
-    for (var i = 0; i < size; i++) {
+    for (var i = 0; i < textureRegions.length; i++) {
       _drawableList.add(DrawableObject());
     }
     _renderComponent.drawableList = _drawableList;

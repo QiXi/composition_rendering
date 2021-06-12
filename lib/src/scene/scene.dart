@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import '../../scene.dart';
 import '../../systems.dart';
 
@@ -8,7 +6,6 @@ abstract class Scene extends BaseObject with Registry {
 
   void init();
 
-  @mustCallSuper
   void updateScene(double deltaTime) {
     systems.debugSystem.startUpdate();
     _sceneManager.update(deltaTime, this);
