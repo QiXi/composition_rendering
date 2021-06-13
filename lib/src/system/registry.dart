@@ -1,5 +1,4 @@
 import '../../systems.dart';
-import 'text_system.dart';
 
 mixin Registry {
   SystemRegistry get systems => SystemRegistry.instance;
@@ -8,7 +7,8 @@ mixin Registry {
 }
 
 class SystemRegistry {
-  static SystemRegistry instance = SystemRegistry(parameters: Parameters());
+  static SystemRegistry instance =
+      SystemRegistry(parameters: Parameters(), assetSystem: InternalAssetSystem());
 
   final Parameters parameters;
 
@@ -18,10 +18,12 @@ class SystemRegistry {
   final TextureSystem textureSystem;
   final CameraSystem cameraSystem;
   final TextSystem textSystem;
+  final AssetSystem assetSystem;
   final DebugSystem debugSystem;
 
   SystemRegistry(
       {required Parameters parameters,
+      required AssetSystem assetSystem,
       RenderSystem? renderSystem,
       UpdateSystem? updateSystem,
       FactorySystem? factorySystem,
@@ -36,6 +38,7 @@ class SystemRegistry {
         textureSystem = textureSystem ?? TextureSystem(),
         cameraSystem = cameraSystem ?? CameraSystem(),
         textSystem = textSystem ?? TextSystem(),
+        assetSystem = assetSystem,
         debugSystem = debugSystem ?? DebugSystem();
 
   @override
