@@ -29,13 +29,13 @@ class SpriteComponent extends Component with SpriteBody {
       if (spriteDirty) {
         spriteDirty = false;
         _drawable.setData(
-            textureRegion: textureRegion, scale: scale, rotation: rotation, opacity: opacity);
+            textureRegion: textureRegion, rotation: rotation, scale: scale, opacity: opacity);
       }
     }
   }
 
   @override
   String toString() {
-    return 'SpriteComponent{ scale:$scale rotation:$rotation opacity:$opacity [$hashCode]}';
+    return 'SpriteComponent{ rotation:$rotation scale:$scale opacity:$opacity [$hashCode]}';
   }
 }

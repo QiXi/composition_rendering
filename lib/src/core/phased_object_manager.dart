@@ -23,8 +23,8 @@ class PhasedObjectManager<T extends PhasedObject> extends ObjectManager<T> with 
   void commitUpdates() {
     super.commitUpdates();
     if (dirty) {
-      getObjects().sort(true);
       dirty = false;
+      getObjects().sort(true);
     }
   }
 

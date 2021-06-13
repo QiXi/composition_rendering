@@ -63,6 +63,6 @@ class RenderListComponent extends Component with DrawOffset {
 
   @override
   String toString() {
-    return 'RenderListComponent{ priority:$priority cameraRelative:$cameraRelative [$hashCode]}';
+    return 'RenderListComponent{ priority:$priority cameraRelative:$cameraRelative offset:$drawOffset [$hashCode]}';
   }
 }

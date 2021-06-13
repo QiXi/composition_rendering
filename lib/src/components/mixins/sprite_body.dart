@@ -4,7 +4,7 @@ mixin SpriteBody {
   double _opacity = 1.0;
   bool _dirty = true;
 
-  void setBody({double opacity = 1.0, double scale = 1.0, double rotation = 0.0}) {
+  void setBody({double rotation = 0.0, double scale = 1.0, double opacity = 1.0}) {
     _rotation = rotation;
     _scale = scale;
     _opacity = opacity;
@@ -46,6 +46,8 @@ mixin SpriteBody {
   }
 
   bool get spriteDirty => _dirty;
+
+  bool get spriteNotDirty => !_dirty;
 
   set spriteDirty(bool value) => _dirty = value;
 }
