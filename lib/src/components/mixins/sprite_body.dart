@@ -4,7 +4,7 @@ mixin SpriteBody {
   double _opacity = 1.0;
   bool _dirty = true;
 
-  void setBody({double rotation = 0.0, double scale = 1.0, double opacity = 1.0}) {
+  void setBody({required double rotation, required double scale, required double opacity}) {
     _rotation = rotation;
     _scale = scale;
     _opacity = opacity;

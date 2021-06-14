@@ -21,13 +21,17 @@ class SceneObject extends ObjectManager<Component> {
 
   Vector2 get position => _position;
 
-  bool get isVisible => _visible;
-
-  set visible(bool visible) => _visible = visible;
-
   set position(Vector2 position) {
     _position.setFrom(position);
   }
+
+  void setPosition(double x, double y) {
+    _position.setValues(x, y);
+  }
+
+  bool get isVisible => _visible;
+
+  set visible(bool visible) => _visible = visible;
 
   double getCenteredPositionX() {
     return _position.x;

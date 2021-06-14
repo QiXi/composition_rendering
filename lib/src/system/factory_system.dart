@@ -7,7 +7,7 @@ import 'registry.dart';
 
 class FactorySystem with Registry {
   //
-  SceneObject spawnSprite(
+  SceneObject buildSprite(
     TextureRegion textureRegion,
     int priority, {
     bool cameraRelative = true,
@@ -19,6 +19,19 @@ class FactorySystem with Registry {
     var spriteComponent = SpriteComponent(textureRegion, renderComponent,
         rotation: rotation, scale: scale, opacity: opacity);
     return SceneObject()..add(renderComponent)..add(spriteComponent);
+  }
+
+  SceneObject spawnSprite(
+    TextureRegion textureRegion,
+    int priority, {
+    bool cameraRelative = true,
+    double rotation = 0.0,
+    double scale = 1.0,
+    double opacity = 1.0,
+  }) {
+    return buildSprite(textureRegion, priority,
+        cameraRelative: cameraRelative, rotation: rotation, scale: scale, opacity: opacity)
+      ..spawn();
   }
 
   List<TextureRegion> spawnTextureRegionsFromLine(
