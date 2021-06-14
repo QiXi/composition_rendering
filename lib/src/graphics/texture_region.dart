@@ -23,14 +23,14 @@ class TextureRegion {
 
   void _init() {
     rawRect = Float32List.fromList(<double>[rect.left, rect.top, rect.right, rect.bottom]);
-    anchorX = -rect.left + rect.width / 2.0;
-    anchorY = -rect.top + rect.height / 2.0;
+    anchorX = rect.width / 2.0;
+    anchorY = rect.height / 2.0;
   }
 
   Image get image => texture.image;
 
   @override
   String toString() {
-    return 'TextureRegion{ rect[${rect.left},${rect.top},${rect.width},${rect.height}] anchor[$anchorX,$anchorY] [$hashCode]}';
+    return 'TextureRegion{ rect[${rect.left.round()},${rect.top.round()},${rect.width.round()},${rect.height.round()}] anchor[${anchorX.round()},${anchorY.round()}] [$hashCode]}';
   }
 }
