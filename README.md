@@ -37,6 +37,7 @@ class GameScene extends Scene {
 
 Plugin for integrating composition rendering into the Flame game engine. <a title="Pub" href="https://pub.dartlang.org/packages/flame_composition_rendering" ><img alt="Pub Version" src="https://img.shields.io/pub/v/flame_composition_rendering?label=flame_composition_rendering&style=for-the-badge"></a>
 
+
 ## History of creation
 
 The source of inspiration was the resource [Replica Island](https://code.google.com/archive/p/replicaisland/)

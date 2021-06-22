@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.2.0
+- Added setWorldSize
+- Added AssetSystem
+
 ## 0.1.1
 - Added setViewSize
 - Rename fromCache method
