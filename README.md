@@ -4,10 +4,10 @@
 
 A tool for creating objects based on composition and painting on canvas. It can be used in the base of the game engine.
 
-Drawing is based on canvas.[drawRawAtlas](https://api.flutter.dev/flutter/dart-ui/Canvas/drawRawAtlas.html)
+Drawing is based on [Canvas.drawRawAtlas](https://api.flutter.dev/flutter/dart-ui/Canvas/drawRawAtlas.html)
 
 ## Demo
-[![example scene](http://img.youtube.com/vi/s7eeh_UWTsI/0.jpg)](http://www.youtube.com/watch?v=s7eeh_UWTsI)
+[![example scene](https://img.youtube.com/vi/s7eeh_UWTsI/0.jpg)](https://www.youtube.com/watch?v=s7eeh_UWTsI)
 
 
 ## Usage
@@ -32,6 +32,10 @@ class GameScene extends Scene {
 }
 ```
 
+
+## Use with Flame
+
+Plugin for integrating composition rendering into the Flame game engine. <a title="Pub" href="https://pub.dartlang.org/packages/flame_composition_rendering" ><img alt="Pub Version" src="https://img.shields.io/pub/v/flame_composition_rendering?label=flame_composition_rendering&style=for-the-badge"></a>
 
 ## History of creation
 
