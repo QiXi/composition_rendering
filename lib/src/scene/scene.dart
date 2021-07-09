@@ -22,6 +22,10 @@ abstract class Scene extends BaseObject with Registry {
     object.scene = this;
   }
 
+  void remove(SceneObject object) {
+    _sceneManager.remove(object);
+  }
+
   void removeAll() {
     _sceneManager.destroyAll();
   }
