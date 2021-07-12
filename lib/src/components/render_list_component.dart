@@ -43,16 +43,13 @@ class RenderListComponent extends Component with DrawOffset {
         if (cameraRelative) {
           final focusPosition = systems.cameraSystem.focusPosition;
           final params = systems.parameters;
-          final x =
-              _positionWorkspace.x - focusPosition.x + params.viewHalfWidth;
-          final y =
-              _positionWorkspace.y - focusPosition.y + params.viewHalfHeight;
+          final x = _positionWorkspace.x - focusPosition.x + params.viewHalfWidth;
+          final y = _positionWorkspace.y - focusPosition.y + params.viewHalfHeight;
           _screenLocation.setValues(x, y);
         }
         for (var i = 0; i < drawableList.length; i++) {
           var drawable = drawableList[i];
-          if (drawable.hasTextureRegion &&
-              drawable.visibleAtPosition(_screenLocation)) {
+          if (drawable.hasTextureRegion && drawable.visibleAtPosition(_screenLocation)) {
             systems.renderSystem.drawObject(
                 drawable: drawable,
                 position: _positionWorkspace,
