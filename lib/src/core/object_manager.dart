@@ -34,7 +34,7 @@ class ObjectManager<T extends BaseObject> extends BaseObject {
       _pendingAdditions.clear();
     }
     if (_pendingRemovals.isNotEmpty) {
-      for (var object in _objectList.list) {
+      for (var object in _pendingRemovals) {
         _objectList.remove(object);
       }
       _pendingRemovals.clear();
