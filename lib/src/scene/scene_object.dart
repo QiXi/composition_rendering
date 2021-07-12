@@ -42,7 +42,10 @@ class SceneObject extends ObjectManager<Component> {
   }
 
   void spawn() {
-    getAdditionsArray().forEach((element) => element.spawn(this));
+    var list = getAdditionsArray();
+    for (var element in list) {
+      element.spawn(this);
+    }
   }
 
   void hide() {

@@ -94,7 +94,8 @@ class RenderSystem with Registry {
 
   void _draw(Canvas canvas) {
     _batch.beginBatch(canvas);
-    _renderQueue.getObjects().forEach((element) {
+    var objects = _renderQueue.getObjects().list;
+    for (var element in objects) {
       if (element is RenderElement) {
         _batch.drawRenderElement(element);
       } else if (element is TextElement) {
@@ -103,7 +104,7 @@ class RenderSystem with Registry {
         element.paint(canvas);
         _batch.beginBatch(canvas);
       }
-    });
+    }
     _batch.endBatch();
   }
 

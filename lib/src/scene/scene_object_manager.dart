@@ -15,13 +15,14 @@ class SceneObjectManager extends ObjectManager<SceneObject> {
   @override
   void update(double deltaTime, BaseObject parent) {
     commitUpdates();
-    getObjects().forEach((element) {
-      if (element.destroyOnDeactivation) {
-        destroy(element);
+    var objects = getObjects().list;
+    for (var object in objects) {
+      if (object.destroyOnDeactivation) {
+        destroy(object);
       } else {
-        element.update(deltaTime, this);
+        object.update(deltaTime, this);
       }
-    });
+    }
   }
 
   void destroy(SceneObject object) {
@@ -31,11 +32,7 @@ class SceneObjectManager extends ObjectManager<SceneObject> {
 
   void destroyAll() {
     commitUpdates();
-    var objects = getObjects();
-    objects.forEach((element) {
-      _markedForDeath.add(element);
-      remove(element);
-    });
+    getObjects().forEach(destroy);
   }
 
   Iterable<SceneObject> getDeathObjects() => _markedForDeath;

@@ -14,14 +14,18 @@ class ObjectManager<T extends BaseObject> extends BaseObject {
   @override
   void reset() {
     commitUpdates();
-    _objectList.list.forEach((element) => element.reset());
+    for (var object in _objectList.list) {
+      object.reset();
+    }
     _objectList.clear();
   }
 
   @override
   void update(double deltaTime, BaseObject parent) {
     commitUpdates();
-    _objectList.list.forEach((element) => element.update(deltaTime, this));
+    for (var object in _objectList.list) {
+      object.update(deltaTime, this);
+    }
   }
 
   void commitUpdates() {
@@ -30,14 +34,14 @@ class ObjectManager<T extends BaseObject> extends BaseObject {
       _pendingAdditions.clear();
     }
     if (_pendingRemovals.isNotEmpty) {
-      _pendingRemovals.forEach((element) => _objectList.remove(element));
+      for (var object in _objectList.list) {
+        _objectList.remove(object);
+      }
       _pendingRemovals.clear();
     }
   }
 
-  int get count {
-    return _objectList.count;
-  }
+  int get count => _objectList.count;
 
   int get concreteCount {
     return _objectList.count + _pendingAdditions.length - _pendingRemovals.length;
@@ -61,7 +65,9 @@ class ObjectManager<T extends BaseObject> extends BaseObject {
 
   void removeAll() {
     _pendingAdditions.clear();
-    _objectList.list.forEach((element) => _pendingRemovals.add(element));
+    for (var object in _objectList.list) {
+      _pendingRemovals.add(object);
+    }
   }
 
   E? findByType<E extends BaseObject>() {
