@@ -46,8 +46,9 @@ class CameraSystem with Registry {
 
   void update(double deltaTime) {
     _currentTime += deltaTime;
-    if (_target != null) {
-      _targetPosition.setValues(_target!.getCenteredPositionX(), _target!.getCenteredPositionY());
+    final target = _target;
+    if (target != null) {
+      _targetPosition.setValues(target.getCenteredPositionX(), target.getCenteredPositionY());
       // extra time to reach the end point
       if (_targetTime > _currentTime - 0.05) {
         final delta = _currentTime - (_targetTime - interpolateToTargetTime);

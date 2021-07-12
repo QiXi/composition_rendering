@@ -43,8 +43,8 @@ class DrawableObject extends Drawable {
     this.textureRegion = textureRegion;
     var scos = data[iscos] = cos(rotation) * scale;
     var ssin = data[issin] = sin(rotation) * scale;
-    if (this.textureRegion != null) {
-      data[itx] = -scos * textureRegion!.anchorX + ssin * textureRegion.anchorY;
+    if (textureRegion != null) {
+      data[itx] = -scos * textureRegion.anchorX + ssin * textureRegion.anchorY;
       data[ity] = -ssin * textureRegion.anchorX - scos * textureRegion.anchorY;
     } else {
       data[itx] = 0.0;

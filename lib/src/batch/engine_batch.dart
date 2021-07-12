@@ -131,10 +131,11 @@ class EngineBatch extends Batch {
   }
 
   void _flush(Canvas? canvas) {
-    if (_image == null || canvas == null) return;
-    _batchData.fillToEnd();
-    _canvas!.drawRawAtlas(_image!, _batchData.rawTransforms, _batchData.rawSources,
-        _batchData.rawColors, defaultBlendMode, _cullRect, defaultPaint);
-    _batchData.reset();
+    if (_image != null && canvas != null) {
+      _batchData.fillToEnd();
+      canvas.drawRawAtlas(_image!, _batchData.rawTransforms, _batchData.rawSources,
+          _batchData.rawColors, defaultBlendMode, _cullRect, defaultPaint);
+      _batchData.reset();
+    }
   }
 }
