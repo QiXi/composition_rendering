@@ -2,8 +2,10 @@
 <a title="Pub" href="https://pub.dartlang.org/packages/composition_rendering" ><img alt="Pub Version" src="https://img.shields.io/pub/v/composition_rendering?color=blue&style=for-the-badge"></a>
 </p>
 
-A tool for creating objects based on composition and painting on canvas. It can be used in the base of the game engine.
-
+## Composition Rendering
+A graphics engine for creating 2D games.
+Composition Rendering is not a game engine. This solution can be used as part of a third-party game engine.
+The functions of creating game scenes and managing graphic objects in the action scene are at your disposal. Object rendering is optimized to minimize the number of drawing commands calls.
 Drawing is based on [Canvas.drawRawAtlas](https://api.flutter.dev/flutter/dart-ui/Canvas/drawRawAtlas.html)
 
 ## Demo

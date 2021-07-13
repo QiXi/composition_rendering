@@ -1,5 +1,5 @@
 name: composition_rendering
-description: A tool for creating objects based on composition and painting on canvas.  It can be used in the base of the game engine.
+description: A graphics engine for creating 2D games. Creating objects based on composition and painting on canvas.
 version: 0.2.0
 homepage: 'https://github.com/QiXi/composition_rendering'
 
