@@ -19,7 +19,7 @@ class EngineBatch extends Batch {
   Image? _image;
   Rect? _cullRect;
 
-  EngineBatch({this.capacity = 1000, BlendMode? blendMode, Paint? paint})
+  EngineBatch({this.capacity = 100, BlendMode? blendMode, Paint? paint})
       : defaultBlendMode = blendMode ?? BlendMode.srcIn,
         defaultPaint = paint ?? Paint()
           ..filterQuality = FilterQuality.low,
