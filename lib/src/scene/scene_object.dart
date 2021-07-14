@@ -48,9 +48,9 @@ class SceneObject extends ObjectManager<Component> {
     }
   }
 
-  void hide() {
-    _visible = false;
-  }
+  void show() => _visible = true;
+
+  void hide() => _visible = false;
 
   void destroy() {
     destroyOnDeactivation = true;

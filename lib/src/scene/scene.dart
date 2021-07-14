@@ -12,6 +12,8 @@ abstract class Scene extends BaseObject with Registry {
     systems.debugSystem.stopUpdate();
   }
 
+  int get count => _sceneManager.count;
+
   @override
   void reset() {
     _sceneManager.reset();
@@ -20,10 +22,6 @@ abstract class Scene extends BaseObject with Registry {
   void add(SceneObject object) {
     _sceneManager.add(object);
     object.scene = this;
-  }
-
-  void remove(SceneObject object) {
-    _sceneManager.remove(object);
   }
 
   void removeAll() {
