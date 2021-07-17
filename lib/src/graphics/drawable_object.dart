@@ -30,12 +30,15 @@ class DrawableObject extends Drawable {
 
   double get ty => data[ity];
 
+  @override
+  bool get notReady => textureRegion == null;
+
   void resetTexture() {
     textureRegion = null;
   }
 
   void setData(
-      {TextureRegion? textureRegion,
+      {required TextureRegion textureRegion,
       double rotation = 0.0,
       double scale = 1.0,
       int? color,
@@ -43,22 +46,17 @@ class DrawableObject extends Drawable {
     this.textureRegion = textureRegion;
     var scos = data[iscos] = cos(rotation) * scale;
     var ssin = data[issin] = sin(rotation) * scale;
-    if (textureRegion != null) {
-      data[itx] = -scos * textureRegion.anchorX + ssin * textureRegion.anchorY;
-      data[ity] = -ssin * textureRegion.anchorX - scos * textureRegion.anchorY;
-    } else {
-      data[itx] = 0.0;
-      data[ity] = 0.0;
-    }
+    data[itx] = -scos * textureRegion.anchorX + ssin * textureRegion.anchorY;
+    data[ity] = -ssin * textureRegion.anchorX - scos * textureRegion.anchorY;
     this.color = color ?? Colors.whiteWithOpacity(opacity.clamp(0.0, 1.0));
   }
 
-  void setDataRegion(TextureRegion textureRegion, {double x = 0, double y = 0}) {
+  void setDataRegion(TextureRegion textureRegion, {double tx = 0, double ty = 0}) {
     this.textureRegion = textureRegion;
     data[iscos] = 1.0;
     data[issin] = 0.0;
-    data[itx] = x;
-    data[ity] = y;
+    data[itx] = tx;
+    data[ity] = ty;
   }
 
   void addPositionFrom(Vector2 position) {
@@ -75,9 +73,6 @@ class DrawableObject extends Drawable {
   bool visibleAtPosition(Vector2 screenLocation) {
     return true; //TODO
   }
-
-  @override
-  bool get notReady => textureRegion == null;
 
   @override
   String toString() {
