@@ -5,14 +5,12 @@ import '../graphics/drawable_object.dart';
 class RenderListComponent extends Component with DrawOffset {
   final Vector2 _positionWorkspace;
   final Vector2 _screenLocation;
-  final List<int> priorityList;
   int priority;
   bool cameraRelative;
   List<DrawableObject>? _drawableList;
 
-  RenderListComponent(this.priority, {this.cameraRelative = true})
-      : priorityList = [],
-        _positionWorkspace = Vector2.zero(),
+  RenderListComponent(this.priority, {this.cameraRelative = true, int length = 1})
+      : _positionWorkspace = Vector2.zero(),
         _screenLocation = Vector2.zero() {
     setPhase(ComponentPhases.draw);
   }
@@ -27,14 +25,10 @@ class RenderListComponent extends Component with DrawOffset {
 
   set drawableList(List<DrawableObject> drawableList) {
     _drawableList = drawableList;
-    priorityList.clear();
-    for (var i = 0; i < drawableList.length; i++) {
-      priorityList.add(priority);
-    }
   }
 
   @override
-  void update(double timeDelta, BaseObject parent) {
+  void update(double deltaTime, BaseObject parent) {
     var drawableList = _drawableList;
     if (drawableList != null) {
       if (parent is SceneObject && parent.isVisible) {
@@ -53,7 +47,7 @@ class RenderListComponent extends Component with DrawOffset {
             systems.renderSystem.drawObject(
                 drawable: drawable,
                 position: _positionWorkspace,
-                priority: priorityList[i],
+                priority: priority + i,
                 cameraRelative: cameraRelative);
           }
         }

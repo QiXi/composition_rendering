@@ -28,6 +28,8 @@ class SpriteListComponent extends Component with SpriteBody {
     resetBody();
   }
 
+  int get length => _textureRegions.length;
+
   TextureRegion? getTextureRegion(int index) {
     if (index < 0 || index >= _textureRegions.length) return null;
     return _textureRegions[index];

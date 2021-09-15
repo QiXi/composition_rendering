@@ -10,7 +10,7 @@ import 'registry.dart';
 import 'text_system.dart';
 
 class RenderSystem with Registry {
-  static final int textureSortBucketSize = 1000;
+  static const int textureSortBucketSize = 1000;
   final PhasedObjectManager<PhasedObject> _renderQueue = PhasedObjectManager();
   final Batch _batch = EngineBatch();
 
@@ -131,12 +131,10 @@ class RenderElement extends PhasedObject {
   RenderElement(
       {required int priority,
       required this.data,
-      required TextureRegion textureRegion,
-      int? color,
+      required this.textureRegion,
+      this.color,
       this.length = 1})
-      : textureRegion = textureRegion,
-        color = color,
-        super(phase: _getRenderPhase(priority, textureRegion.texture));
+      : super(phase: _getRenderPhase(priority, textureRegion.texture));
 
   @override
   void reset() {}

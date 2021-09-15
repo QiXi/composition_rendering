@@ -8,7 +8,7 @@ import 'batch.dart';
 import 'batch_data.dart';
 
 class EngineBatch extends Batch {
-  static final int defaultColor = 0xffffffff;
+  static const int defaultColor = 0xffffffff;
 
   final Paint defaultPaint;
   final BlendMode defaultBlendMode;

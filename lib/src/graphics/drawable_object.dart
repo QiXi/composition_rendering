@@ -76,6 +76,6 @@ class DrawableObject extends Drawable {
 
   @override
   String toString() {
-    return 'DrawableObject{ textureRegion:$textureRegion data:$data [$hashCode]}';
+    return 'DrawableObject{ $textureRegion data:$data [$hashCode]}';
   }
 }

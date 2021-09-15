@@ -18,7 +18,9 @@ class FactorySystem with Registry {
     var renderComponent = RenderComponent(priority, cameraRelative: cameraRelative);
     var spriteComponent = SpriteComponent(textureRegion, renderComponent,
         rotation: rotation, scale: scale, opacity: opacity);
-    return SceneObject()..add(renderComponent)..add(spriteComponent);
+    return SceneObject()
+      ..add(renderComponent)
+      ..add(spriteComponent);
   }
 
   SceneObject spawnSprite(
