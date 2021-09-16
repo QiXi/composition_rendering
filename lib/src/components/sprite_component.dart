@@ -2,20 +2,20 @@ import '../../components.dart';
 import '../../graphics.dart';
 
 class SpriteComponent extends Component with SpriteBody {
-  final RenderComponent _renderComponent;
-  final TextureRegion textureRegion;
-  final DrawableObject _drawable;
+  RenderComponent? _renderComponent;
+  TextureRegion textureRegion;
+  final DrawableObject drawable = DrawableObject();
 
   SpriteComponent(
-    this.textureRegion,
-    this._renderComponent, {
+    this.textureRegion, {
+    RenderComponent? render,
     double rotation = 0.0,
     double scale = 1.0,
     double opacity = 1.0,
-  }) : _drawable = DrawableObject() {
+  }) : _renderComponent = render {
     setPhase(ComponentPhases.preDraw);
     setBody(rotation: rotation, scale: scale, opacity: opacity);
-    _renderComponent.drawable = _drawable;
+    _renderComponent?.drawable = drawable;
   }
 
   @override
@@ -28,10 +28,23 @@ class SpriteComponent extends Component with SpriteBody {
     if (parent is SceneObject && parent.isVisible) {
       if (spriteDirty) {
         spriteDirty = false;
-        _drawable.setData(
+        drawable.setData(
             textureRegion: textureRegion, rotation: rotation, scale: scale, opacity: opacity);
       }
     }
+  }
+
+  @override
+  void spawn(BaseObject parent) {
+    if (_renderComponent == null && parent is SceneObject) {
+      var render = parent.findByType<RenderComponent>();
+      _renderComponent = render;
+      _renderComponent?.drawable = drawable;
+    }
+  }
+
+  void setRenderComponent(RenderComponent component) {
+    _renderComponent = component..drawable = drawable;
   }
 
   @override

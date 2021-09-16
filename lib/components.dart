@@ -1,3 +1,6 @@
+export 'src/animation/animation_clip.dart';
+export 'src/animation/animation_data.dart';
+export 'src/animation/sprite_animation_component.dart';
 export 'src/components/component.dart';
 export 'src/components/mixins/draw_offset.dart';
 export 'src/components/mixins/sprite_body.dart';

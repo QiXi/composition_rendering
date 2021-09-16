@@ -16,8 +16,8 @@ class FactorySystem with Registry {
     double opacity = 1.0,
   }) {
     var renderComponent = RenderComponent(priority, cameraRelative: cameraRelative);
-    var spriteComponent = SpriteComponent(textureRegion, renderComponent,
-        rotation: rotation, scale: scale, opacity: opacity);
+    var spriteComponent = SpriteComponent(textureRegion,
+        render: renderComponent, rotation: rotation, scale: scale, opacity: opacity);
     return SceneObject()
       ..add(renderComponent)
       ..add(spriteComponent);
