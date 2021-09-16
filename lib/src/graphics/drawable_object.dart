@@ -31,11 +31,9 @@ class DrawableObject extends Drawable {
   double get ty => data[ity];
 
   @override
-  bool get notReady => textureRegion == null;
+  bool get isReady => textureRegion != null;
 
-  void resetTexture() {
-    textureRegion = null;
-  }
+  void resetTexture() => textureRegion = null;
 
   void setData(
       {required TextureRegion textureRegion,
@@ -76,6 +74,6 @@ class DrawableObject extends Drawable {
 
   @override
   String toString() {
-    return 'DrawableObject{ $textureRegion data:$data [$hashCode]}';
+    return 'DrawableObject{ ready:$isReady $textureRegion data:$data [$hashCode]}';
   }
 }

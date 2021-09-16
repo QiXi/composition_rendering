@@ -25,7 +25,8 @@ class RenderComponent extends Component with DrawOffset {
 
   @override
   void update(double deltaTime, BaseObject parent) {
-    if (drawable == null || drawable!.notReady) {
+    var drawable = this.drawable;
+    if (drawable == null || drawable.isNotReady) {
       return;
     }
     if (parent is SceneObject && parent.isVisible) {
@@ -38,9 +39,9 @@ class RenderComponent extends Component with DrawOffset {
         final y = _positionWorkspace.y - focusPosition.y + params.viewHalfHeight;
         _screenLocation.setValues(x, y);
       }
-      if (drawable!.visibleAtPosition(_screenLocation)) {
+      if (drawable.visibleAtPosition(_screenLocation)) {
         systems.renderSystem.draw(
-            drawable: drawable!,
+            drawable: drawable,
             position: _positionWorkspace,
             priority: priority,
             cameraRelative: cameraRelative);

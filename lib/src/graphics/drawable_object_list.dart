@@ -30,7 +30,7 @@ class DrawableObjectList extends Drawable {
   }
 
   @override
-  bool get notReady => textureRegion == null || data == null;
+  bool get isReady => textureRegion != null && data != null;
 
   @override
   String toString() {

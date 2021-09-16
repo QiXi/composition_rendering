@@ -1,12 +1,14 @@
 import '../core/math.dart';
 
 abstract class Drawable {
-  bool get notReady;
+  bool get isReady;
+
+  bool get isNotReady => !isReady;
 
   bool visibleAtPosition(Vector2 screenLocation);
 
   @override
   String toString() {
-    return 'Drawable{[$hashCode]]}';
+    return 'Drawable{ ready:$isReady [$hashCode]}';
   }
 }

@@ -1,15 +1,15 @@
 import '../../components.dart';
+import '../../graphics.dart';
 import '../core/math.dart';
-import '../graphics/drawable_object.dart';
 
 class RenderListComponent extends Component with DrawOffset {
   final Vector2 _positionWorkspace;
   final Vector2 _screenLocation;
   int priority;
   bool cameraRelative;
-  List<DrawableObject>? _drawableList;
+  List<DrawableObject>? drawableList;
 
-  RenderListComponent(this.priority, {this.cameraRelative = true, int length = 1})
+  RenderListComponent(this.priority, {this.cameraRelative = true})
       : _positionWorkspace = Vector2.zero(),
         _screenLocation = Vector2.zero() {
     setPhase(ComponentPhases.draw);
@@ -20,16 +20,12 @@ class RenderListComponent extends Component with DrawOffset {
     _positionWorkspace.setZero();
     _screenLocation.setZero();
     drawOffset.setZero();
-    _drawableList = null;
-  }
-
-  set drawableList(List<DrawableObject> drawableList) {
-    _drawableList = drawableList;
+    drawableList = null;
   }
 
   @override
   void update(double deltaTime, BaseObject parent) {
-    var drawableList = _drawableList;
+    var drawableList = this.drawableList;
     if (drawableList != null) {
       if (parent is SceneObject && parent.isVisible) {
         _positionWorkspace.setFrom(parent.position);
@@ -43,7 +39,7 @@ class RenderListComponent extends Component with DrawOffset {
         }
         for (var i = 0; i < drawableList.length; i++) {
           var drawable = drawableList[i];
-          if (drawable.hasTextureRegion && drawable.visibleAtPosition(_screenLocation)) {
+          if (drawable.isReady && drawable.visibleAtPosition(_screenLocation)) {
             systems.renderSystem.drawObject(
                 drawable: drawable,
                 position: _positionWorkspace,

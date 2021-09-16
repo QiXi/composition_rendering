@@ -11,10 +11,10 @@ class DrawableText extends Drawable {
   bool get hasTextPainter => textPainter != null;
 
   @override
+  bool get isReady => hasTextPainter;
+
+  @override
   bool visibleAtPosition(Vector2 screenLocation) {
     return true; //TODO
   }
-
-  @override
-  bool get notReady => textPainter == null;
 }

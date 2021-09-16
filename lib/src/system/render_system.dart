@@ -37,7 +37,7 @@ class RenderSystem with Registry {
     }
     // DrawableObjectList
     else if (drawable is DrawableObjectList) {
-      if (drawable.notReady) {
+      if (drawable.isNotReady) {
         return;
       }
       _renderQueue.add(RenderElement(
@@ -56,16 +56,15 @@ class RenderSystem with Registry {
       required Vector2 position,
       required int priority,
       bool cameraRelative = true}) {
-    if (!drawable.hasTextureRegion) {
-      return;
+    if (drawable.hasTextureRegion) {
+      drawTextureRegion(
+          textureRegion: drawable.textureRegion!,
+          data: drawable.data,
+          color: drawable.color,
+          position: position,
+          priority: priority,
+          cameraRelative: cameraRelative);
     }
-    drawTextureRegion(
-        textureRegion: drawable.textureRegion!,
-        data: drawable.data,
-        color: drawable.color,
-        position: position,
-        priority: priority,
-        cameraRelative: cameraRelative);
   }
 
   void drawTextureRegion(
