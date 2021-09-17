@@ -3,7 +3,6 @@ import 'dart:typed_data';
 import 'dart:ui';
 
 import '../graphics/texture_region.dart';
-import '../system/render_system.dart';
 import 'batch.dart';
 import 'batch_data.dart';
 
@@ -33,16 +32,6 @@ class EngineBatch extends Batch {
   void beginBatch(Canvas canvas, {Rect? cullRect}) {
     _canvas = canvas;
     _cullRect = cullRect;
-  }
-
-  @override
-  void drawRenderElement(RenderElement element) {
-    final textureRegion = element.textureRegion!;
-    if (element.single) {
-      drawTextureRegion(textureRegion, element.data!, element.color);
-    } else {
-      drawImages(textureRegion.image, element.data!, textureRegion.rawRect, element.color);
-    }
   }
 
   @override

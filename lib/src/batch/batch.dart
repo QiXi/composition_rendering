@@ -2,14 +2,11 @@ import 'dart:typed_data';
 import 'dart:ui';
 
 import '../graphics/texture_region.dart';
-import '../system/render_system.dart';
 
 abstract class Batch {
   void beginBatch(Canvas canvas, {Rect? cullRect});
 
   void endBatch();
-
-  void drawRenderElement(RenderElement element);
 
   void drawTextureRegion(TextureRegion textureRegion, Float32List data, int? color);
 

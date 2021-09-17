@@ -44,12 +44,11 @@ class RenderSystem with Registry {
       }
       var element = elementPool.allocate();
       if (element != null) {
-        element.set(
+        element.setRaw(
             priority: priority,
             data: drawable.data!,
             textureRegion: drawable.textureRegion!,
-            color: drawable.color,
-            length: drawable.length);
+            color: drawable.color);
         _renderQueue.add(element);
       }
     } else {
@@ -80,23 +79,17 @@ class RenderSystem with Registry {
       required int priority,
       int? color,
       bool cameraRelative = true}) {
-    final elementData = data.sublist(0);
-    if (cameraRelative) {
-      final focusPosition = systems.cameraSystem.focusPosition;
-      elementData[2] += position.x - focusPosition.x + parameters.viewHalfWidth;
-      elementData[3] += position.y - focusPosition.y + parameters.viewHalfHeight;
-    } else {
-      elementData[2] += position.x;
-      elementData[3] += position.y;
-    }
     var element = elementPool.allocate();
     if (element != null) {
-      element.set(
-          priority: priority,
-          data: elementData,
-          textureRegion: textureRegion,
-          color: color,
-          length: 1);
+      element.setSingle(priority: priority, data: data, textureRegion: textureRegion, color: color);
+      if (cameraRelative) {
+        final focusPosition = systems.cameraSystem.focusPosition;
+        var x = position.x - focusPosition.x + parameters.viewHalfWidth;
+        var y = position.y - focusPosition.y + parameters.viewHalfHeight;
+        element.move(x, y);
+      } else {
+        element.move(position.x, position.y);
+      }
       _renderQueue.add(element);
     }
   }
@@ -110,7 +103,12 @@ class RenderSystem with Registry {
     var objects = _renderQueue.getObjects().list;
     for (var element in objects) {
       if (element is RenderElement) {
-        _batch.drawRenderElement(element);
+        var textureRegion = element.textureRegion!;
+        if (element.isSingle) {
+          _batch.drawTextureRegion(textureRegion, element.single, element.color);
+        } else {
+          _batch.drawImages(textureRegion.image, element.raw!, textureRegion.rawRect, element.color);
+        }
       } else if (element is TextElement) {
         //TODO
         _batch.endBatch();
@@ -147,39 +145,55 @@ class RenderSystem with Registry {
 }
 
 class RenderElement extends PhasedObject {
-  Float32List? data;
+  Float32List single = Float32List(4);
+  Float32List? raw;
   TextureRegion? textureRegion;
   int? color;
-  int length = 1;
 
   RenderElement._();
 
-  set(
+  void setSingle(
       {required int priority,
       required Float32List data,
       required TextureRegion textureRegion,
-      int? color,
-      required int length}) {
+      int? color}) {
     phase = _getRenderPhase(priority, textureRegion.texture.sortIndex);
-    this.data = data;
+    single.setAll(0, data);
+    raw = null;
     this.textureRegion = textureRegion;
     this.color = color;
-    this.length = length;
+  }
+
+  void setRaw(
+      {required int priority,
+      required Float32List data,
+      required TextureRegion textureRegion,
+      int? color}) {
+    phase = _getRenderPhase(priority, textureRegion.texture.sortIndex);
+    raw = data;
+    this.textureRegion = textureRegion;
+    this.color = color;
+  }
+
+  void move(double dx, double dy) {
+    single[2] += dx;
+    single[3] += dy;
   }
 
   @override
   void reset() {
-    data = null;
+    raw = null;
     textureRegion = null;
     color = null;
-    length = 1;
   }
 
-  bool get single => length == 1;
+  bool get isSingle => raw == null;
+
+  int get length => (raw == null) ? 0 : raw!.length ~/ 4;
 
   @override
   String toString() {
-    return 'RenderElement{ phase:$phase data:$data $textureRegion color:$color [$hashCode]}';
+    return 'RenderElement{ phase:$phase data:$single $textureRegion color:$color [$hashCode]}';
   }
 }
 
