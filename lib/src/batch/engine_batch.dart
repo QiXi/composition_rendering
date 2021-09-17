@@ -37,11 +37,11 @@ class EngineBatch extends Batch {
 
   @override
   void drawRenderElement(RenderElement element) {
-    final textureRegion = element.textureRegion;
+    final textureRegion = element.textureRegion!;
     if (element.single) {
-      drawTextureRegion(textureRegion, element.data, element.color);
+      drawTextureRegion(textureRegion, element.data!, element.color);
     } else {
-      drawImages(textureRegion.image, element.data, textureRegion.rawRect, element.color);
+      drawImages(textureRegion.image, element.data!, textureRegion.rawRect, element.color);
     }
   }
 

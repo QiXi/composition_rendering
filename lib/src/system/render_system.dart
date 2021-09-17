@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:typed_data';
 import 'dart:ui';
 
@@ -13,6 +14,7 @@ class RenderSystem with Registry {
   static const int textureSortBucketSize = 1000;
   final PhasedObjectManager<PhasedObject> _renderQueue = PhasedObjectManager();
   final Batch _batch = EngineBatch();
+  final RenderElementPool elementPool = RenderElementPool(512);
 
   void draw(
       {required Drawable drawable,
@@ -40,12 +42,16 @@ class RenderSystem with Registry {
       if (drawable.isNotReady) {
         return;
       }
-      _renderQueue.add(RenderElement(
-          priority: priority,
-          data: drawable.data!,
-          textureRegion: drawable.textureRegion!,
-          color: drawable.color,
-          length: drawable.length));
+      var element = elementPool.allocate();
+      if (element != null) {
+        element.set(
+            priority: priority,
+            data: drawable.data!,
+            textureRegion: drawable.textureRegion!,
+            color: drawable.color,
+            length: drawable.length);
+        _renderQueue.add(element);
+      }
     } else {
       print('not supported element');
     }
@@ -83,8 +89,16 @@ class RenderSystem with Registry {
       elementData[2] += position.x;
       elementData[3] += position.y;
     }
-    _renderQueue.add(RenderElement(
-        priority: priority, data: elementData, textureRegion: textureRegion, color: color));
+    var element = elementPool.allocate();
+    if (element != null) {
+      element.set(
+          priority: priority,
+          data: elementData,
+          textureRegion: textureRegion,
+          color: color,
+          length: 1);
+      _renderQueue.add(element);
+    }
   }
 
   void drawTextElement(TextElement textElement) {
@@ -111,8 +125,19 @@ class RenderSystem with Registry {
     systems.debugSystem.startRender();
     _renderQueue.commitUpdates();
     _draw(canvas);
-    _renderQueue.reset();
+    clearQueue();
     systems.debugSystem.stopRender();
+  }
+
+  void clearQueue() {
+    var objects = _renderQueue.getObjects().list;
+    for (int i = objects.length - 1; i >= 0; i--) {
+      var element = objects[i];
+      if (element is RenderElement) {
+        elementPool.release(element);
+      }
+    }
+    _renderQueue.reset();
   }
 
   @override
@@ -122,30 +147,58 @@ class RenderSystem with Registry {
 }
 
 class RenderElement extends PhasedObject {
-  final Float32List data;
-  final TextureRegion textureRegion;
-  final int? color;
-  final int length;
+  Float32List? data;
+  TextureRegion? textureRegion;
+  int? color;
+  int length = 1;
 
-  RenderElement(
+  RenderElement._();
+
+  set(
       {required int priority,
-      required this.data,
-      required this.textureRegion,
-      this.color,
-      this.length = 1})
-      : super(phase: _getRenderPhase(priority, textureRegion.texture));
+      required Float32List data,
+      required TextureRegion textureRegion,
+      int? color,
+      required int length}) {
+    phase = _getRenderPhase(priority, textureRegion.texture.sortIndex);
+    this.data = data;
+    this.textureRegion = textureRegion;
+    this.color = color;
+    this.length = length;
+  }
 
   @override
-  void reset() {}
+  void reset() {
+    data = null;
+    textureRegion = null;
+    color = null;
+    length = 1;
+  }
 
   bool get single => length == 1;
 
   @override
   String toString() {
-    return '\nRenderElement{ phase:$phase data:$data $textureRegion color:$color [$hashCode]}';
+    return 'RenderElement{ phase:$phase data:$data $textureRegion color:$color [$hashCode]}';
   }
 }
 
-int _getRenderPhase(int priority, Texture texture) {
-  return priority * RenderSystem.textureSortBucketSize + texture.sortIndex;
+int _getRenderPhase(int priority, int sortIndex) {
+  return priority * RenderSystem.textureSortBucketSize + sortIndex;
+}
+
+class RenderElementPool extends ObjectPool<RenderElement> {
+  RenderElementPool(int max) : super(max);
+
+  @override
+  void release(RenderElement entry) {
+    super.release(entry);
+  }
+
+  @override
+  void fill(Queue<RenderElement> data) {
+    for (int i = 0; i < size; i++) {
+      data.add(RenderElement._());
+    }
+  }
 }

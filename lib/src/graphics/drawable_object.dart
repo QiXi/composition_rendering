@@ -2,8 +2,10 @@ import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui';
 
-import '../../graphics.dart';
 import '../core/math.dart';
+import 'colors.dart';
+import 'drawable.dart';
+import 'texture_region.dart';
 
 const int iscos = 0;
 const int issin = 1;

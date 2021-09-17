@@ -17,4 +17,9 @@ class DrawableText extends Drawable {
   bool visibleAtPosition(Vector2 screenLocation) {
     return true; //TODO
   }
+
+  @override
+  String toString() {
+    return 'DrawableText{ ready:$isReady $textPainter [$hashCode]}';
+  }
 }
