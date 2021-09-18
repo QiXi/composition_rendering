@@ -1,6 +1,6 @@
 class DebugSystem {
-  static final double targetFPS = 60.0;
-  static final double showDebugInterval = 30;
+  static const double targetFPS = 60.0;
+  static const double showDebugInterval = 30;
   final String tag;
   final Stopwatch _updateWatch = Stopwatch();
   final Stopwatch _renderWatch = Stopwatch();

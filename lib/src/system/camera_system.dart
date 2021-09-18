@@ -3,8 +3,8 @@ import '../../scene.dart';
 import '../../systems.dart';
 
 class CameraSystem with Registry {
-  static final double interpolateToTargetTime = 1.0;
-  static final double maxInterpolateToTargetDistance = 1000.0;
+  static const double interpolateToTargetTime = 1.0;
+  static const double maxInterpolateToTargetDistance = 1000.0;
   final Vector2 _currentCameraPosition = Vector2.zero();
   final Vector2 _preInterpolateCameraPosition = Vector2.zero();
   final Vector2 _focalPosition = Vector2.zero();

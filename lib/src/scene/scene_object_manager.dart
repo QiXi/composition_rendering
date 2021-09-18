@@ -2,9 +2,9 @@ import '../../core.dart';
 import 'scene_object.dart';
 
 class SceneObjectManager extends ObjectManager<SceneObject> {
-  final List<SceneObject> _markedForDeath;
+  final List<SceneObject> _markedForDeath = [];
 
-  SceneObjectManager() : _markedForDeath = [];
+  SceneObjectManager();
 
   @override
   void commitUpdates() {
