@@ -100,7 +100,7 @@ class RenderSystem with Registry {
 
   void _draw(Canvas canvas) {
     _batch.beginBatch(canvas);
-    var objects = _renderQueue.getObjects().list;
+    var objects = _renderQueue.getObjects().data;
     for (var element in objects) {
       if (element is RenderElement) {
         var textureRegion = element.textureRegion!;
@@ -128,7 +128,7 @@ class RenderSystem with Registry {
   }
 
   void clearQueue() {
-    var objects = _renderQueue.getObjects().list;
+    var objects = _renderQueue.getObjects().data;
     for (int i = objects.length - 1; i >= 0; i--) {
       var element = objects[i];
       if (element is RenderElement) {

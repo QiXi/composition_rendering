@@ -1,10 +1,10 @@
 class SortedList<T> {
-  final List<T> _data;
+  final List<T> data;
   bool _sorted;
   int Function(T a, T b)? _comparator;
 
   SortedList({int Function(T a, T b)? comparator})
-      : _data = [],
+      : data = [],
         _sorted = false,
         _comparator = comparator;
 
@@ -13,37 +13,35 @@ class SortedList<T> {
     _sorted = false;
   }
 
-  int get count => _data.length;
+  int get count => data.length;
 
-  int getCapacity() => _data.length;
-
-  List<T> get list => _data;
+  int getCapacity() => data.length;
 
   void add(T object) {
-    _data.add(object);
+    data.add(object);
     _sorted = false;
   }
 
   void remove(T object) {
-    _data.remove(object);
+    data.remove(object);
     _sorted = false;
   }
 
   void clear() {
-    _data.clear();
+    data.clear();
     _sorted = false;
   }
 
   void forEach(void Function(T element) action) {
-    _data.forEach(action);
+    data.forEach(action);
   }
 
   void sort(bool forceResort) {
     if (!_sorted || forceResort) {
       if (_comparator != null) {
-        _data.sort(_comparator);
+        data.sort(_comparator);
       } else {
-        _data.sort();
+        data.sort();
       }
       _sorted = true;
     }

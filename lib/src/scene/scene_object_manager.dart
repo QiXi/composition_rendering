@@ -15,7 +15,7 @@ class SceneObjectManager extends ObjectManager<SceneObject> {
   @override
   void update(double deltaTime, BaseObject parent) {
     commitUpdates();
-    var objects = getObjects().list;
+    var objects = getObjects().data;
     for (var object in objects) {
       if (object.destroyOnDeactivation) {
         destroy(object);

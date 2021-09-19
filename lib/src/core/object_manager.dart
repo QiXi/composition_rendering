@@ -14,7 +14,8 @@ class ObjectManager<T extends BaseObject> extends BaseObject {
   @override
   void reset() {
     commitUpdates();
-    for (var object in _objectList.list) {
+    final list = _objectList.data;
+    for (var object in list) {
       object.reset();
     }
     _objectList.clear();
@@ -23,14 +24,15 @@ class ObjectManager<T extends BaseObject> extends BaseObject {
   @override
   void update(double deltaTime, BaseObject parent) {
     commitUpdates();
-    for (var object in _objectList.list) {
+    final list = _objectList.data;
+    for (var object in list) {
       object.update(deltaTime, this);
     }
   }
 
   void commitUpdates() {
     if (_pendingAdditions.isNotEmpty) {
-      _objectList.list.addAll(_pendingAdditions);
+      _objectList.data.addAll(_pendingAdditions);
       _pendingAdditions.clear();
     }
     if (_pendingRemovals.isNotEmpty) {
@@ -48,7 +50,7 @@ class ObjectManager<T extends BaseObject> extends BaseObject {
   }
 
   T getAt(int index) {
-    return _objectList.list[index];
+    return _objectList.data[index];
   }
 
   SortedList<T> getObjects() => _objectList;
@@ -65,13 +67,14 @@ class ObjectManager<T extends BaseObject> extends BaseObject {
 
   void removeAll() {
     _pendingAdditions.clear();
-    for (var object in _objectList.list) {
+    final list = _objectList.data;
+    for (var object in list) {
       _pendingRemovals.add(object);
     }
   }
 
   E? findByType<E extends BaseObject>() {
-    var object = _findByType<E>(_objectList.list);
+    var object = _findByType<E>(_objectList.data);
     object ??= _findByType<E>(_pendingAdditions);
     return object;
   }
