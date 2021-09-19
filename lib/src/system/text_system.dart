@@ -14,9 +14,6 @@ class TextSystem with Registry {
       required Vector2 position,
       required int priority,
       bool cameraRelative = true}) {
-    if (drawable.isNotReady) {
-      return;
-    }
     drawTextPainter(
         textPainter: drawable.textPainter!,
         position: position,

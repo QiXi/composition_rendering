@@ -39,9 +39,6 @@ class RenderSystem with Registry {
     }
     // DrawableObjectList
     else if (drawable is DrawableObjectList) {
-      if (drawable.isNotReady) {
-        return;
-      }
       var element = elementPool.allocate();
       if (element != null) {
         element.setRaw(

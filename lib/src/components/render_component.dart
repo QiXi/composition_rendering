@@ -26,7 +26,7 @@ class RenderComponent extends Component with DrawOffset {
   @override
   void update(double deltaTime, BaseObject parent) {
     var drawable = this.drawable;
-    if (drawable == null || drawable.isNotReady) {
+    if (drawable == null || !drawable.isReady) {
       return;
     }
     if (parent is SceneObject && parent.isVisible) {
