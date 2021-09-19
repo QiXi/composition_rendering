@@ -81,15 +81,22 @@ class RenderSystem with Registry {
       bool cameraRelative = true}) {
     var element = elementPool.allocate();
     if (element != null) {
-      element.setSingle(priority: priority, data: data, textureRegion: textureRegion, color: color);
+      var dx, dy;
       if (cameraRelative) {
         final focusPosition = systems.cameraSystem.focusPosition;
-        var x = position.x - focusPosition.x + parameters.viewHalfWidth;
-        var y = position.y - focusPosition.y + parameters.viewHalfHeight;
-        element.move(x, y);
+        dx = position.x - focusPosition.x + parameters.viewHalfWidth;
+        dy = position.y - focusPosition.y + parameters.viewHalfHeight;
       } else {
-        element.move(position.x, position.y);
+        dx = position.x;
+        dy = position.y;
       }
+      element.setSingle(
+          priority: priority,
+          data: data,
+          textureRegion: textureRegion,
+          color: color,
+          dx: dx,
+          dy: dy);
       _renderQueue.add(element);
     }
   }
@@ -107,7 +114,8 @@ class RenderSystem with Registry {
         if (element.isSingle) {
           _batch.drawTextureRegion(textureRegion, element.single, element.color);
         } else {
-          _batch.drawImages(textureRegion.image, element.raw!, textureRegion.rawRect, element.color);
+          _batch.drawImages(
+              textureRegion.image, element.raw!, textureRegion.rawRect, element.color);
         }
       } else if (element is TextElement) {
         //TODO
@@ -156,9 +164,14 @@ class RenderElement extends PhasedObject {
       {required int priority,
       required Float32List data,
       required TextureRegion textureRegion,
-      int? color}) {
+      int? color,
+      double dx = 0,
+      double dy = 0}) {
     phase = _getRenderPhase(priority, textureRegion.texture.sortIndex);
-    single.setAll(0, data);
+    single[0] = data[0];
+    single[1] = data[1];
+    single[2] = data[2] + dx;
+    single[3] = data[3] + dy;
     raw = null;
     this.textureRegion = textureRegion;
     this.color = color;
@@ -173,11 +186,6 @@ class RenderElement extends PhasedObject {
     raw = data;
     this.textureRegion = textureRegion;
     this.color = color;
-  }
-
-  void move(double dx, double dy) {
-    single[2] += dx;
-    single[3] += dy;
   }
 
   @override
