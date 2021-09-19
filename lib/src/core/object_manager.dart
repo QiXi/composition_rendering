@@ -15,8 +15,8 @@ class ObjectManager<T extends BaseObject> extends BaseObject {
   void reset() {
     commitUpdates();
     final list = _objectList.data;
-    for (var object in list) {
-      object.reset();
+    for (var i = 0; i < list.length; i++) {
+      list[i].reset();
     }
     _objectList.clear();
   }
@@ -25,8 +25,8 @@ class ObjectManager<T extends BaseObject> extends BaseObject {
   void update(double deltaTime, BaseObject parent) {
     commitUpdates();
     final list = _objectList.data;
-    for (var object in list) {
-      object.update(deltaTime, this);
+    for (var i = 0; i < list.length; i++) {
+      list[i].update(deltaTime, this);
     }
   }
 
@@ -36,8 +36,8 @@ class ObjectManager<T extends BaseObject> extends BaseObject {
       _pendingAdditions.clear();
     }
     if (_pendingRemovals.isNotEmpty) {
-      for (var object in _pendingRemovals) {
-        _objectList.remove(object);
+      for (var i = 0; i < _pendingRemovals.length; i++) {
+        _objectList.remove(_pendingRemovals[i]);
       }
       _pendingRemovals.clear();
     }
@@ -68,8 +68,8 @@ class ObjectManager<T extends BaseObject> extends BaseObject {
   void removeAll() {
     _pendingAdditions.clear();
     final list = _objectList.data;
-    for (var object in list) {
-      _pendingRemovals.add(object);
+    for (var i = 0; i < list.length; i++) {
+      _pendingRemovals.add(list[i]);
     }
   }
 
