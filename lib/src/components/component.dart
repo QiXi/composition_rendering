@@ -3,7 +3,11 @@ import '../core/phased_object.dart';
 import '../system/registry.dart';
 
 abstract class Component extends PhasedObject with Registry {
-  Component({ComponentPhases phase = ComponentPhases.phase0}) : super(phase: phase.index);
+  /// Unique name for the search
+  String? componentName;
+
+  Component({this.componentName, ComponentPhases phase = ComponentPhases.phase0})
+      : super(phase: phase.index);
 
   void setPhase(ComponentPhases value) {
     phase = value.index;

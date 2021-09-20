@@ -56,6 +56,16 @@ class SceneObject extends ObjectManager<Component> {
     destroyOnDeactivation = true;
   }
 
+  Component? findComponentByName(String name) {
+    final length = count;
+    for (var i = 0; i < length; i++) {
+      var component = getAt(i);
+      if (name == component.componentName) {
+        return component;
+      }
+    }
+  }
+
   @override
   String toString() {
     return 'SceneObject{ position:$_position width:$width height:$height additions:${getAdditionsArray()} [$hashCode]}';
