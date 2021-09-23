@@ -1,5 +1,5 @@
 <p align="center">
-<a title="Pub" href="https://pub.dartlang.org/packages/composition_rendering" ><img alt="Pub Version" src="https://img.shields.io/pub/v/composition_rendering?color=blue&style=for-the-badge"></a>
+<a title="Pub" href="https://pub.dartlang.org/packages/composition_rendering"><img alt="Pub Version" src="https://img.shields.io/pub/v/composition_rendering?color=blue&style=for-the-badge"></a>
 </p>
 
 ## Composition Rendering
@@ -39,7 +39,7 @@ class GameScene extends Scene {
 
 ## Use with Flame
 
-Plugin for integrating composition rendering into the Flame game engine. <a title="Pub" href="https://pub.dartlang.org/packages/flame_composition_rendering" ><img alt="Pub Version" src="https://img.shields.io/pub/v/flame_composition_rendering?label=flame_composition_rendering&style=for-the-badge"></a>
+Plugin for integrating `composition rendering` into the Flame game engine. <a title="Pub" href="https://pub.dartlang.org/packages/flame_composition_rendering" ><img alt="Pub Version" src="https://img.shields.io/pub/v/flame_composition_rendering?label=flame_composition_rendering&style=for-the-badge"></a>
 
 
 ## History of creation

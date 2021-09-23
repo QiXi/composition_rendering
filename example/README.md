@@ -1,3 +1,7 @@
+Composition Rendering Examples
+==========================
+
+```dart
 import 'package:composition_rendering/core.dart';
 import 'package:composition_rendering/scene.dart';
 
@@ -17,3 +21,4 @@ class GameScene extends Scene {
     add(background);
   }
 }
+```
