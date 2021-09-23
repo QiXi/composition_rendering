@@ -37,6 +37,7 @@ class SortedList<T> {
   }
 
   void sort(bool forceResort) {
+    //TODO performance
     if (!_sorted || forceResort) {
       if (_comparator != null) {
         data.sort(_comparator);

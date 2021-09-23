@@ -7,11 +7,11 @@ import 'package:composition_rendering/batch.dart';
 import 'package:test/test.dart';
 
 void main() {
-  final defaultColor = 0xffffffff;
+  const defaultColor = 0xffffffff;
   test('EngineBatch.drawImage', () async {
     final image = await _createImage(1, 1);
     final bath = EngineBatch(capacity: 2);
-    bath.drawImageFromData(image, Rect.fromLTWH(0, 0, 1, 1), 1, 0, 0, 0, defaultColor);
+    bath.drawImageFromData(image, const Rect.fromLTWH(0, 0, 1, 1), 1, 0, 0, 0, defaultColor);
     expect(bath.rectCount, 1);
     expect(bath.freeLength, 4);
     var rawSprite = Float32List.fromList([1, 0, 10, 10, 1, 0, 20, 20, 1, 0, 30, 30]);

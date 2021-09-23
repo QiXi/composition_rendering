@@ -30,6 +30,7 @@ class BatchData {
   }
 
   void fillOneUnit(Float32List rstTransforms, Float32List rect, int color, [int skipCount = 0]) {
+    //TODO performance
     final index0 = currentIndex;
     rawTransforms.setRange(index0, index0 + 4, rstTransforms, skipCount);
     rawSources.setRange(index0, index0 + 4, rect, skipCount);

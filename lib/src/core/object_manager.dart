@@ -57,6 +57,8 @@ class ObjectManager<T extends BaseObject> extends BaseObject {
 
   List<T> getAdditionsArray() => _pendingAdditions;
 
+  List<T> getRemovalsArray() => _pendingRemovals;
+
   void add(T object) {
     _pendingAdditions.add(object);
   }
@@ -80,14 +82,13 @@ class ObjectManager<T extends BaseObject> extends BaseObject {
   }
 
   E? _findByType<E extends BaseObject>(List<T> _objectArray) {
-    final count = _objectArray.length;
-    for (var i = 0; i < count; i++) {
+    final length = _objectArray.length;
+    for (var i = 0; i < length; i++) {
       var currentObject = _objectArray[i];
       if (currentObject.runtimeType == E) {
         return currentObject as E;
       }
     }
-    return null;
   }
 
   @override

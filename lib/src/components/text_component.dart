@@ -11,7 +11,7 @@ class TextComponent extends Component with Dirty {
   );
   final TextPainter _textPainter;
   final DrawableText _drawable;
-  var _textStyle;
+  final TextStyle _textStyle;
   String _text;
 
   TextComponent(this._text, RenderComponent renderComponent, {TextStyle? style})
