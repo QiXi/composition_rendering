@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.3.0 (2021-09-23)
+* Added `SpriteAnimationComponent`
+* Performance optimization
+* Added `componentName`
+
 ## 0.2.1
 * Limit on `EngineBatch` capacity=100
 
