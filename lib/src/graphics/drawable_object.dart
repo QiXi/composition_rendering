@@ -1,41 +1,36 @@
 import 'dart:math';
-import 'dart:typed_data';
 import 'dart:ui';
 
+import '../../core.dart';
 import '../core/math.dart';
 import 'colors.dart';
 import 'drawable.dart';
 import 'texture_region.dart';
 
-const int iscos = 0;
-const int issin = 1;
-const int itx = 2;
-const int ity = 3;
-
 class DrawableObject extends Drawable {
-  // [scos, ssin, tx, ty]
-  final Float32List data = Float32List(4);
+  final TransformData data;
   TextureRegion? textureRegion;
   int? color;
 
-  DrawableObject();
+  DrawableObject() : data = TransformData.allocate();
 
   bool get hasTextureRegion => textureRegion != null;
 
   Image? get image => textureRegion?.texture.image;
 
-  double get scos => data[iscos];
+  double get scos => data.scos;
 
-  double get ssin => data[issin];
+  double get ssin => data.ssin;
 
-  double get tx => data[itx];
+  double get tx => data.tx;
 
-  double get ty => data[ity];
+  double get ty => data.ty;
 
   @override
   bool get isReady => textureRegion != null;
 
   void reset() {
+    data.release();
     resetTexture();
   }
 
@@ -48,30 +43,26 @@ class DrawableObject extends Drawable {
       int? color,
       double opacity = 1.0}) {
     this.textureRegion = textureRegion;
-    var scos = data[iscos] = cos(rotation) * scale;
-    var ssin = data[issin] = sin(rotation) * scale;
-    data[itx] = -scos * textureRegion.anchorX + ssin * textureRegion.anchorY;
-    data[ity] = -ssin * textureRegion.anchorX - scos * textureRegion.anchorY;
+    var scos = cos(rotation) * scale;
+    var ssin = sin(rotation) * scale;
+    var tx = -scos * textureRegion.anchorX + ssin * textureRegion.anchorY;
+    var ty = -ssin * textureRegion.anchorX - scos * textureRegion.anchorY;
+    data.set(scos, ssin, tx, ty);
     this.color = color ?? Colors.whiteWithOpacity(opacity.clamp(0.0, 1.0));
   }
 
   void setDataRegion(TextureRegion textureRegion,
       {double tx = 0, double ty = 0}) {
     this.textureRegion = textureRegion;
-    data[iscos] = 1.0;
-    data[issin] = 0.0;
-    data[itx] = tx;
-    data[ity] = ty;
+    data.set(1.0, 0.0, tx, ty);
   }
 
   void addPositionFrom(Vector2 position) {
-    data[itx] += position.x;
-    data[ity] += position.y;
+    data.set(data.scos, data.ssin, data.tx + position.x, data.ty + position.y);
   }
 
   void addPosition(double x, double y) {
-    data[itx] += x;
-    data[ity] += y;
+    data.set(data.scos, data.ssin, data.tx + x, data.ty + y);
   }
 
   @override

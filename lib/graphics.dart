@@ -1,3 +1,4 @@
+export 'src/core/transform_data.dart';
 export 'src/graphics/colors.dart';
 export 'src/graphics/drawable.dart';
 export 'src/graphics/drawable_object.dart';

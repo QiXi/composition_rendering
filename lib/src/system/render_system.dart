@@ -60,7 +60,7 @@ class RenderSystem with Registry {
     if (drawable.hasTextureRegion) {
       drawTextureRegion(
           textureRegion: drawable.textureRegion!,
-          data: drawable.data,
+          transform: drawable.data,
           color: drawable.color,
           position: position,
           priority: priority,
@@ -70,7 +70,7 @@ class RenderSystem with Registry {
 
   void drawTextureRegion(
       {required TextureRegion textureRegion,
-      required Float32List data,
+      required TransformData transform,
       required Vector2 position,
       required int priority,
       int? color,
@@ -88,7 +88,7 @@ class RenderSystem with Registry {
       }
       element.setSingle(
           priority: priority,
-          data: data,
+          data: transform,
           textureRegion: textureRegion,
           color: color,
           dx: dx,
@@ -159,16 +159,16 @@ class RenderElement extends PhasedObject {
 
   void setSingle(
       {required int priority,
-      required Float32List data,
+      required TransformData data,
       required TextureRegion textureRegion,
       int? color,
       double dx = 0,
       double dy = 0}) {
     phase = _getRenderPhase(priority, textureRegion.texture.sortIndex);
-    single[0] = data[0];
-    single[1] = data[1];
-    single[2] = data[2] + dx;
-    single[3] = data[3] + dy;
+    single[0] = data.scos;
+    single[1] = data.ssin;
+    single[2] = data.tx + dx;
+    single[3] = data.ty + dy;
     raw = null;
     this.textureRegion = textureRegion;
     this.color = color;

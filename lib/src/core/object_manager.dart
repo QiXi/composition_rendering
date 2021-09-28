@@ -11,12 +11,14 @@ class ObjectManager<T extends BaseObject> extends BaseObject {
   @override
   void reset() {
     commitUpdates();
-    final list = _objectList.data;
-    final length = list.length;
-    for (var i = 0; i < length; i++) {
-      list[i].reset();
+    if (_objectList.count > 0) {
+      final list = _objectList.data;
+      final length = list.length;
+      for (var i = 0; i < length; i++) {
+        list[i].reset();
+      }
+      _objectList.clear();
     }
-    _objectList.clear();
   }
 
   @override
@@ -38,6 +40,7 @@ class ObjectManager<T extends BaseObject> extends BaseObject {
       final length = _pendingRemovals.length;
       for (var i = 0; i < length; i++) {
         _objectList.remove(_pendingRemovals[i]);
+        _pendingRemovals[i].reset();
       }
       _pendingRemovals.clear();
     }

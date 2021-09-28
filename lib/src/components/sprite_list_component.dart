@@ -26,6 +26,9 @@ class SpriteListComponent extends Component with SpriteBody {
   @override
   void reset() {
     resetBody();
+    for (var i = 0; i < _textureRegions.length; i++) {
+      _drawableList[i].reset();
+    }
   }
 
   int get length => _textureRegions.length;
@@ -53,7 +56,10 @@ class SpriteListComponent extends Component with SpriteBody {
           var drawable = _drawableList[i];
           var textureRegion = _textureRegions[i];
           drawable.setData(
-              textureRegion: textureRegion, rotation: rotation, scale: scale, opacity: opacity);
+              textureRegion: textureRegion,
+              rotation: rotation,
+              scale: scale,
+              opacity: opacity);
         }
       }
     }
