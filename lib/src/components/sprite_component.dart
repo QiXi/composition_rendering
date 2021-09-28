@@ -21,6 +21,7 @@ class SpriteComponent extends Component with SpriteBody {
   @override
   void reset() {
     resetBody();
+    drawable.reset();
   }
 
   @override

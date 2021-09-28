@@ -15,8 +15,13 @@ class SceneObject extends ObjectManager<Component> {
 
   @override
   void reset() {
+    super.reset();
     _position.setZero();
-    _visible = true;
+    _visible = false;
+    destroyOnDeactivation = false;
+    scene = null;
+    width = 0;
+    height = 0;
   }
 
   Vector2 get position => _position;

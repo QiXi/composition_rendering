@@ -29,6 +29,7 @@ class SceneObjectManager extends ObjectManager<SceneObject> {
   void destroy(SceneObject object) {
     _markedForDeath.add(object);
     remove(object);
+    object.reset();
   }
 
   void destroyAll() {

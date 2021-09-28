@@ -35,6 +35,10 @@ class DrawableObject extends Drawable {
   @override
   bool get isReady => textureRegion != null;
 
+  void reset() {
+    resetTexture();
+  }
+
   void resetTexture() => textureRegion = null;
 
   void setData(
@@ -51,7 +55,8 @@ class DrawableObject extends Drawable {
     this.color = color ?? Colors.whiteWithOpacity(opacity.clamp(0.0, 1.0));
   }
 
-  void setDataRegion(TextureRegion textureRegion, {double tx = 0, double ty = 0}) {
+  void setDataRegion(TextureRegion textureRegion,
+      {double tx = 0, double ty = 0}) {
     this.textureRegion = textureRegion;
     data[iscos] = 1.0;
     data[issin] = 0.0;
