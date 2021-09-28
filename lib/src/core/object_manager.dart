@@ -2,14 +2,11 @@ import 'base_object.dart';
 import 'sorted_list.dart';
 
 class ObjectManager<T extends BaseObject> extends BaseObject {
-  final SortedList<T> _objectList;
-  final List<T> _pendingAdditions;
-  final List<T> _pendingRemovals;
+  final SortedList<T> _objectList = SortedList();
+  final List<T> _pendingAdditions = [];
+  final List<T> _pendingRemovals = [];
 
-  ObjectManager()
-      : _objectList = SortedList(),
-        _pendingAdditions = [],
-        _pendingRemovals = [];
+  ObjectManager();
 
   @override
   void reset() {

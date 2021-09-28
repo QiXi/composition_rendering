@@ -3,8 +3,9 @@ import 'dart:collection';
 abstract class ObjectPool<E> {
   final Queue<E> _data = Queue<E>();
   final int size;
+  final Function builder;
 
-  ObjectPool([this.size = 32]) {
+  ObjectPool(this.builder, [this.size = 32]) {
     fill(_data);
   }
 
@@ -20,5 +21,9 @@ abstract class ObjectPool<E> {
 
   int get allocatedCount => size - _data.length;
 
-  void fill(Queue<E> data);
+  void fill(Queue<E> data) {
+    for (var i = 0; i < size; i++) {
+      release(builder());
+    }
+  }
 }

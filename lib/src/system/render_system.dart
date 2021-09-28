@@ -105,7 +105,8 @@ class RenderSystem with Registry {
   void _draw(Canvas canvas) {
     _batch.beginBatch(canvas);
     var objects = _renderQueue.getObjects().data;
-    for (var element in objects) {
+    for (int i = 0; i < objects.length; i++) {
+      var element = objects[i];
       if (element is RenderElement) {
         var textureRegion = element.textureRegion!;
         if (element.isSingle) {
@@ -207,17 +208,5 @@ int _getRenderPhase(int priority, int sortIndex) {
 }
 
 class RenderElementPool extends ObjectPool<RenderElement> {
-  RenderElementPool(int max) : super(max);
-
-  @override
-  void release(RenderElement entry) {
-    super.release(entry);
-  }
-
-  @override
-  void fill(Queue<RenderElement> data) {
-    for (int i = 0; i < size; i++) {
-      data.add(RenderElement._());
-    }
-  }
+  RenderElementPool(int size) : super(() => RenderElement._(), size);
 }
