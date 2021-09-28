@@ -12,7 +12,8 @@ class ObjectManager<T extends BaseObject> extends BaseObject {
   void reset() {
     commitUpdates();
     final list = _objectList.data;
-    for (var i = 0; i < list.length; i++) {
+    final length = list.length;
+    for (var i = 0; i < length; i++) {
       list[i].reset();
     }
     _objectList.clear();
@@ -22,7 +23,8 @@ class ObjectManager<T extends BaseObject> extends BaseObject {
   void update(double deltaTime, BaseObject parent) {
     commitUpdates();
     final list = _objectList.data;
-    for (var i = 0; i < list.length; i++) {
+    final length = list.length;
+    for (var i = 0; i < length; i++) {
       list[i].update(deltaTime, this);
     }
   }
@@ -33,7 +35,8 @@ class ObjectManager<T extends BaseObject> extends BaseObject {
       _pendingAdditions.clear();
     }
     if (_pendingRemovals.isNotEmpty) {
-      for (var i = 0; i < _pendingRemovals.length; i++) {
+      final length = _pendingRemovals.length;
+      for (var i = 0; i < length; i++) {
         _objectList.remove(_pendingRemovals[i]);
       }
       _pendingRemovals.clear();
@@ -43,7 +46,9 @@ class ObjectManager<T extends BaseObject> extends BaseObject {
   int get count => _objectList.count;
 
   int get concreteCount {
-    return _objectList.count + _pendingAdditions.length - _pendingRemovals.length;
+    return _objectList.count +
+        _pendingAdditions.length -
+        _pendingRemovals.length;
   }
 
   T getAt(int index) {
@@ -67,7 +72,8 @@ class ObjectManager<T extends BaseObject> extends BaseObject {
   void removeAll() {
     _pendingAdditions.clear();
     final list = _objectList.data;
-    for (var i = 0; i < list.length; i++) {
+    final length = list.length;
+    for (var i = 0; i < length; i++) {
       _pendingRemovals.add(list[i]);
     }
   }

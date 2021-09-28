@@ -43,7 +43,9 @@ class SceneObject extends ObjectManager<Component> {
 
   void spawn() {
     var list = getAdditionsArray();
-    for (var element in list) {
+    final length = list.length;
+    for (int i = 0; i < length; i++) {
+      var element = list[i];
       element.spawn(this);
     }
   }
@@ -68,6 +70,7 @@ class SceneObject extends ObjectManager<Component> {
 
   @override
   String toString() {
-    return 'SceneObject{ position:$_position width:$width height:$height additions:${getAdditionsArray()} [$hashCode]}';
+    return 'SceneObject{ position:$_position width:$width height:$height'
+        ' additions:${getAdditionsArray()} [$hashCode]}';
   }
 }
