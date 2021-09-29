@@ -1,6 +1,6 @@
 import 'package:composition_rendering/engine.dart';
 
-import 'bullet_component.dart';
+import 'components/bullet_component.dart';
 import 'player_component.dart';
 
 // Factory

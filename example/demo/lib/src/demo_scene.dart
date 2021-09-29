@@ -1,6 +1,6 @@
 import 'package:composition_rendering/engine.dart';
 
-import 'focusing_component.dart';
+import 'components/focusing_component.dart';
 import 'game_factory.dart';
 
 class DemoScene extends Scene with Factory {
