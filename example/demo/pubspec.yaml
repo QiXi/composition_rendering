@@ -1,0 +1,23 @@
+name: demo
+description: An example project for the `composition_rendering` binding.
+publish_to: 'none'
+version: 0.0.0
+
+environment:
+  sdk: '>=2.14.2 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  vector_math: '>=2.1.0 <3.0.0'
+  composition_rendering: ^0.3.0
+  flame_composition_rendering: ^0.1.0-dev.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^1.0.0
+
+flutter:
+  assets:
+    - assets/images/
