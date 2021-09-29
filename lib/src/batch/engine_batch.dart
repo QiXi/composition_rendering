@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui';
 
+import '../../graphics.dart';
 import '../graphics/texture_region.dart';
 import 'batch.dart';
 import 'batch_data.dart';

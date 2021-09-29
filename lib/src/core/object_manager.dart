@@ -5,6 +5,8 @@ class ObjectManager<T extends BaseObject> extends BaseObject {
   final SortedList<T> _objectList = SortedList();
   final List<T> _pendingAdditions = [];
   final List<T> _pendingRemovals = [];
+  bool additionsDirty = false; //slowly pendingAdditions.isNotEmpty
+  bool removalsDirty = false; //slowly pendingAdditions.isNotEmpty
 
   ObjectManager();
 
@@ -32,26 +34,26 @@ class ObjectManager<T extends BaseObject> extends BaseObject {
   }
 
   void commitUpdates() {
-    if (_pendingAdditions.isNotEmpty) {
+    if (additionsDirty && _pendingAdditions.isNotEmpty) {
       _objectList.data.addAll(_pendingAdditions);
       _pendingAdditions.clear();
+      additionsDirty = false;
     }
-    if (_pendingRemovals.isNotEmpty) {
+    if (removalsDirty && _pendingRemovals.isNotEmpty) {
       final length = _pendingRemovals.length;
       for (var i = 0; i < length; i++) {
         _objectList.remove(_pendingRemovals[i]);
         _pendingRemovals[i].reset();
       }
       _pendingRemovals.clear();
+      removalsDirty = false;
     }
   }
 
   int get count => _objectList.count;
 
   int get concreteCount {
-    return _objectList.count +
-        _pendingAdditions.length -
-        _pendingRemovals.length;
+    return _objectList.count + _pendingAdditions.length - _pendingRemovals.length;
   }
 
   T getAt(int index) {
@@ -66,10 +68,12 @@ class ObjectManager<T extends BaseObject> extends BaseObject {
 
   void add(T object) {
     _pendingAdditions.add(object);
+    additionsDirty = true;
   }
 
   void remove(T object) {
     _pendingRemovals.add(object);
+    removalsDirty = true;
   }
 
   void removeAll() {
@@ -79,6 +83,7 @@ class ObjectManager<T extends BaseObject> extends BaseObject {
     for (var i = 0; i < length; i++) {
       _pendingRemovals.add(list[i]);
     }
+    removalsDirty = true;
   }
 
   E? findByType<E extends BaseObject>() {
