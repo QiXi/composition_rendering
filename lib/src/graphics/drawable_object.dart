@@ -48,7 +48,7 @@ class DrawableObject extends Drawable {
     var tx = -scos * textureRegion.anchorX + ssin * textureRegion.anchorY;
     var ty = -ssin * textureRegion.anchorX - scos * textureRegion.anchorY;
     data.set(scos, ssin, tx, ty);
-    this.color = color ?? Colors.whiteWithOpacity(opacity.clamp(0.0, 1.0));
+    this.color = color ?? Colors.whiteWithOpacity(opacity);
   }
 
   void setDataRegion(TextureRegion textureRegion,
