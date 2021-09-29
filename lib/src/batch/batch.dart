@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'dart:ui';
 
-import '../graphics/texture_region.dart';
+import '../../graphics.dart';
 
 abstract class Batch {
   void beginBatch(Canvas canvas, {Rect? cullRect});

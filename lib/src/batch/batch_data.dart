@@ -2,6 +2,8 @@ import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui';
 
+import '../../graphics.dart';
+
 class BatchData {
   final Float32List rawTransforms;
   final Float32List rawSources;
@@ -29,11 +31,22 @@ class BatchData {
     rawSources.fillRange(currentIndex, rawSources.length, 0);
   }
 
-  void fillOneUnit(Float32List rstTransforms, Float32List rect, int color, [int skipCount = 0]) {
-    //TODO performance
+  void fillOneUnit(Float32List rstTransforms, Float32List rect, int color) {
     final index0 = currentIndex;
-    rawTransforms.setRange(index0, index0 + 4, rstTransforms, skipCount);
-    rawSources.setRange(index0, index0 + 4, rect, skipCount);
+    final index1 = index0 + 1;
+    final index2 = index0 + 2;
+    final index3 = index0 + 3;
+
+    rawTransforms[index0] = rstTransforms[iscos];
+    rawTransforms[index1] = rstTransforms[issin];
+    rawTransforms[index2] = rstTransforms[itx];
+    rawTransforms[index3] = rstTransforms[ity];
+
+    rawSources[index0] = rect[0];
+    rawSources[index1] = rect[1];
+    rawSources[index2] = rect[2];
+    rawSources[index3] = rect[3];
+
     rawColors[_rectCount] = color;
     _rectCount++;
   }
