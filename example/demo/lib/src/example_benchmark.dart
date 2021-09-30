@@ -46,7 +46,7 @@ class Benchmark extends Scene {
     for (var i = 0; i < size; i++) {
       for (var j = 0; j < size; j++) {
         add(gameFactory.spawnElement('element.png')
-          ..position.setValues(200 + i * step * 2, 25 + j * step * 1));
+          ..position.setValues(25 + i * step * 2, 25 + j * step * 1));
       }
     }
   }

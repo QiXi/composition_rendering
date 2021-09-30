@@ -14,18 +14,6 @@ class TextSystem with Registry {
       required Vector2 position,
       required int priority,
       bool cameraRelative = true}) {
-    drawTextPainter(
-        textPainter: drawable.textPainter!,
-        position: position,
-        priority: priority,
-        cameraRelative: cameraRelative);
-  }
-
-  void drawTextPainter(
-      {required TextPainter textPainter,
-      required Vector2 position,
-      required int priority,
-      bool cameraRelative = true}) {
     var x = position.x;
     var y = position.y;
     if (cameraRelative) {
@@ -34,7 +22,7 @@ class TextSystem with Registry {
       y += -focusPosition.y + parameters.viewHalfHeight;
     }
     systems.renderSystem
-        .drawTextElement(TextElement(priority, textPainter: textPainter, dx: x, dy: y));
+        .drawTextElement(TextElement(priority, textPainter: drawable.textPainter!, dx: x, dy: y));
   }
 }
 
