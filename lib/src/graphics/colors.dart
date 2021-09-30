@@ -11,8 +11,9 @@ class Colors {
   }
 
   static int clamp(int value, [int lowerLimit = 0, int upperLimit = 255]) {
-    var clamp = value < lowerLimit ? lowerLimit : value;
-    return clamp > upperLimit ? upperLimit : clamp;
+    if (value < lowerLimit) return lowerLimit;
+    if (value > upperLimit) return upperLimit;
+    return value;
   }
 
   static int whiteWithAlpha(int a) {
