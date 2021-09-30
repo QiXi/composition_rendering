@@ -30,8 +30,9 @@ class RenderComponent extends Component with DrawOffset {
       return;
     }
     if (parent is SceneObject && parent.isVisible) {
-      _positionWorkspace.setFrom(parent.position);
-      _positionWorkspace.add(drawOffset);
+      _positionWorkspace
+        ..setFrom(parent.position)
+        ..add(drawOffset);
       if (cameraRelative) {
         final focusPosition = systems.cameraSystem.focusPosition;
         final params = systems.parameters;

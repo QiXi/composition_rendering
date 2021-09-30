@@ -2,7 +2,7 @@ import '../../engine.dart';
 import '../core/math.dart';
 
 class SceneObject extends ObjectManager<Component> {
-  final Vector2 _position;
+  final Vector2 position;
   bool _visible;
   bool destroyOnDeactivation = false;
   Scene? scene;
@@ -10,13 +10,13 @@ class SceneObject extends ObjectManager<Component> {
   double height = 0;
 
   SceneObject({Vector2? position})
-      : _position = position ?? Vector2.zero(),
+      : this.position = position ?? Vector2.zero(),
         _visible = true;
 
   @override
   void reset() {
     super.reset();
-    _position.setZero();
+    position.setZero();
     _visible = false;
     destroyOnDeactivation = false;
     scene = null;
@@ -24,14 +24,8 @@ class SceneObject extends ObjectManager<Component> {
     height = 0;
   }
 
-  Vector2 get position => _position;
-
-  set position(Vector2 position) {
-    _position.setFrom(position);
-  }
-
   void setPosition(double x, double y) {
-    _position.setValues(x, y);
+    position.setValues(x, y);
   }
 
   bool get isVisible => _visible;
@@ -39,11 +33,11 @@ class SceneObject extends ObjectManager<Component> {
   set visible(bool visible) => _visible = visible;
 
   double getCenteredPositionX() {
-    return _position.x;
+    return position.x;
   }
 
   double getCenteredPositionY() {
-    return _position.y;
+    return position.y;
   }
 
   void spawn() {
@@ -75,7 +69,7 @@ class SceneObject extends ObjectManager<Component> {
 
   @override
   String toString() {
-    return 'SceneObject{ position:$_position width:$width height:$height'
+    return 'SceneObject{ position:$position width:$width height:$height'
         ' additions:${getAdditionsArray()} [$hashCode]}';
   }
 }
