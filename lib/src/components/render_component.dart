@@ -23,29 +23,31 @@ class RenderComponent extends Component with DrawOffset {
     drawable = null;
   }
 
+  // performance 100%
   @override
   void update(double deltaTime, BaseObject parent) {
     var drawable = this.drawable;
     if (drawable == null || !drawable.isReady) {
       return;
     }
+    var positionWorkspace = _positionWorkspace;
     if (parent is SceneObject && parent.isVisible) {
-      _positionWorkspace
+      positionWorkspace
         ..setFrom(parent.position)
-        ..add(drawOffset);
+        ..add(drawOffset); // 25%
       if (cameraRelative) {
         final focusPosition = systems.cameraSystem.focusPosition;
         final params = systems.parameters;
-        final x = _positionWorkspace.x - focusPosition.x + params.viewHalfWidth;
-        final y = _positionWorkspace.y - focusPosition.y + params.viewHalfHeight;
+        final x = positionWorkspace.x - focusPosition.x + params.viewHalfWidth;
+        final y = positionWorkspace.y - focusPosition.y + params.viewHalfHeight;
         _screenLocation.setValues(x, y);
       }
       if (drawable.visibleAtPosition(_screenLocation)) {
         systems.renderSystem.draw(
             drawable: drawable,
-            position: _positionWorkspace,
+            position: positionWorkspace,
             priority: priority,
-            cameraRelative: cameraRelative);
+            cameraRelative: cameraRelative); // 40%
       }
     }
   }

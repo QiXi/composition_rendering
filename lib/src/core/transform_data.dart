@@ -42,8 +42,14 @@ class TransformData {
     elements.set(index, scos, ssin, tx, ty);
   }
 
+  void setXY(double tx, double ty) {
+    var data = elements.data;
+    data[txIndex] = tx;
+    data[tyIndex] = ty;
+  }
+
   @override
   String toString() {
-    return 'TransformData{ index:$index [$scos, $ssin, $tx, $ty] [$hashCode]}}';
+    return 'TransformData{ index:$index [$scos, $ssin, $tx, $ty] [$hashCode]}';
   }
 }

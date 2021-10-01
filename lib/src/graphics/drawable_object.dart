@@ -36,6 +36,7 @@ class DrawableObject extends Drawable {
 
   void resetTexture() => textureRegion = null;
 
+  // performance 100%
   void setData(
       {required TextureRegion textureRegion,
       double rotation = 0.0,
@@ -47,7 +48,7 @@ class DrawableObject extends Drawable {
     var ssin = sin(rotation) * scale;
     var tx = -scos * textureRegion.anchorX + ssin * textureRegion.anchorY;
     var ty = -ssin * textureRegion.anchorX - scos * textureRegion.anchorY;
-    data.set(scos, ssin, tx, ty);
+    data.set(scos, ssin, tx, ty); // 30%
     this.color = color ?? ((opacity == 1.0) ? Colors.white : Colors.whiteWithOpacity(opacity));
   }
 

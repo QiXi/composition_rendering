@@ -7,6 +7,7 @@ export 'dart:math';
 
 export 'package:vector_math/vector_math_64.dart' show Vector2;
 
+const double halfPi = pi / 2;
 const double twoPi = pi * 2;
 
 bool positionInRect(Vector2 position, Rect rect) {
