@@ -10,17 +10,12 @@ abstract class Batch {
 
   void drawTextureRegion(TextureRegion textureRegion, Float32List data, int? color);
 
-  void drawTextureRegionFromRSTransform(
-      TextureRegion textureRegion, RSTransform transform, int? color);
-
   void drawTextureRegionFromData(
       TextureRegion textureRegion, double scos, double ssin, double tx, double ty, int? color);
 
   void drawImage(Image image, Float32List data, Float32List rect, int? color);
 
   void drawImages(Image image, Float32List data, Float32List rect, int? color);
-
-  void drawImageFromRSTransform(Image image, Rect rect, RSTransform transform, int? color);
 
   void drawImageFromData(
       Image image, Rect rect, double scos, double ssin, double tx, double ty, int? color);

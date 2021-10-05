@@ -41,22 +41,9 @@ class EngineBatch extends Batch {
   }
 
   @override
-  void drawTextureRegionFromRSTransform(
-      TextureRegion textureRegion, RSTransform transform, int? color) {
-    drawImageFromRSTransform(textureRegion.texture.image, textureRegion.rect, transform, color);
-  }
-
-  @override
   void drawTextureRegionFromData(
       TextureRegion textureRegion, double scos, double ssin, double tx, double ty, int? color) {
     drawImageFromData(textureRegion.texture.image, textureRegion.rect, scos, ssin, tx, ty, color);
-  }
-
-  @override
-  void drawImageFromRSTransform(Image image, Rect rect, RSTransform transform, int? color) {
-    _checkFlush(image);
-    _image = image;
-    _batchData.fillFromRSTransform(transform, rect, color ?? defaultColor);
   }
 
   @override
