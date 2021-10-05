@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 0.3.1 (2021-10-05)
+* Performance optimization
+
 ## 0.3.0 (2021-09-23)
 * Added `SpriteAnimationComponent`
 * Performance optimization

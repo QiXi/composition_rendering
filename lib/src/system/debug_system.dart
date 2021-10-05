@@ -12,7 +12,7 @@ class DebugSystem {
 
   bool debugMode = false;
 
-  DebugSystem({String tag = 'main'}) : tag = tag;
+  DebugSystem({this.tag = 'main'});
 
   void update(double deltaTime) {
     currentTime += deltaTime;

@@ -1,10 +1,10 @@
 name: composition_rendering
 description: A graphics engine for creating 2D games. Creating objects based on composition and painting on canvas.
-version: 0.3.0
+version: 0.3.1
 homepage: 'https://github.com/QiXi/composition_rendering'
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: '>=2.14.0 <3.0.0'
   flutter: '>=1.24.0'
 
 dependencies:
