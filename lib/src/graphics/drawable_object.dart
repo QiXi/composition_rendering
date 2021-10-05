@@ -1,7 +1,7 @@
-import 'dart:math';
 import 'dart:ui';
 
 import '../../core.dart';
+import '../core/fast_math.dart';
 import '../core/math.dart';
 import 'colors.dart';
 import 'drawable.dart';
@@ -36,7 +36,6 @@ class DrawableObject extends Drawable {
 
   void resetTexture() => textureRegion = null;
 
-  // performance 100%
   void setData(
       {required TextureRegion textureRegion,
       double rotation = 0.0,
@@ -44,12 +43,22 @@ class DrawableObject extends Drawable {
       int? color,
       double opacity = 1.0}) {
     this.textureRegion = textureRegion;
-    var scos = cos(rotation) * scale;
-    var ssin = sin(rotation) * scale;
-    var tx = -scos * textureRegion.anchorX + ssin * textureRegion.anchorY;
-    var ty = -ssin * textureRegion.anchorX - scos * textureRegion.anchorY;
-    data.set(scos, ssin, tx, ty); // 30%
+    setTransformData(
+        rotation: rotation,
+        scale: scale,
+        anchorX: textureRegion.anchorX,
+        anchorY: textureRegion.anchorY);
     this.color = color ?? ((opacity == 1.0) ? Colors.white : Colors.whiteWithOpacity(opacity));
+  }
+
+  void setTransformData(
+      {double rotation = 0.0, double scale = 1.0, double anchorX = 0.0, double anchorY = 0.0}) {
+    var round = radRound(rotation % twoPi); //TODO %
+    var scos = fastCos(round) * scale;
+    var ssin = fastSin(round) * scale;
+    var tx = -scos * anchorX + ssin * anchorY;
+    var ty = -ssin * anchorX - scos * anchorY;
+    data.set(scos, ssin, tx, ty);
   }
 
   void setDataRegion(TextureRegion textureRegion, {double tx = 0, double ty = 0}) {

@@ -1,4 +1,4 @@
-import 'math.dart';
+import 'fast_math.dart';
 
 class Lerp {
   static double lerp(double start, double target, double duration, double timeSinceStart) {

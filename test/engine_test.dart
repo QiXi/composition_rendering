@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'dart:ui';
 
 import 'package:composition_rendering/batch.dart';
+import 'package:composition_rendering/src/core/fast_math.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -19,6 +21,19 @@ void main() {
     bath.drawImages(image, rawSprite, rawRect, defaultColor);
     expect(bath.rectCount, 2);
     expect(bath.freeLength, 0);
+  });
+
+  test('FastMath', () async {
+    var radians = -twoPi;
+    while (radians < twoPi) {
+      var round = radRound(radians);
+      var fSin = fastSin(round);
+      var diff = fSin - sin(round);
+      // var d = round * 180 / pi;
+      // print('${d.roundToDouble()} $fSin ${sin(round)} diff:$diff (${(diff * 180 / pi)})');
+      expect(diff < 0.057, true);// max 3.2 deg
+      radians += 0.05;
+    }
   });
 }
 

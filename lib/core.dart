@@ -1,4 +1,5 @@
 export 'src/core/base_object.dart';
+export 'src/core/fast_math.dart';
 export 'src/core/float4data.dart';
 export 'src/core/lerp.dart';
 export 'src/core/math.dart';

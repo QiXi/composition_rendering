@@ -1,8 +1,8 @@
-import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui';
 
 import '../../graphics.dart';
+import '../core/fast_math.dart';
 import '../graphics/texture_region.dart';
 import 'batch.dart';
 import 'batch_data.dart';
@@ -107,8 +107,9 @@ class EngineBatch extends Batch {
       required double translateY,
       int? color}) {
     _checkFlush(image);
-    final scos = cos(rotation) * scale;
-    final ssin = sin(rotation) * scale;
+    var round = radRound(rotation);
+    final scos = fastCos(rotation) * scale;
+    final ssin = fastSin(rotation) * scale;
     final tx = translateX + -scos * anchorX + ssin * anchorY;
     final ty = translateY + -ssin * anchorX - scos * anchorY;
     _image = image;
