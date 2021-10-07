@@ -1,9 +1,10 @@
 import 'dart:ui';
 
+import 'package:composition_rendering/engine.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flame_composition_rendering/flame_composition_rendering.dart';
-import 'package:composition_rendering/engine.dart';
+import 'package:vector_math/vector_math_64.dart' as math;
 
 import 'components/rotation_component.dart';
 
@@ -18,6 +19,7 @@ class ExampleBenchmark extends FlameGame with FPSCounter {
 
   @override
   Future<void> onLoad() async {
+    super.onLoad();
     await Flame.images.loadAll(['element.png']);
     add(stageComponent);
   }
@@ -30,7 +32,7 @@ class ExampleBenchmark extends FlameGame with FPSCounter {
         canvas,
         'fps:${fpsCount.ceilToDouble()} '
         ' objects:${gameScene.count}',
-        Vector2.zero());
+        math.Vector2.zero());
   }
 }
 

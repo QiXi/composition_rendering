@@ -1,9 +1,9 @@
-import 'package:demo/src/example_benchmark.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
-import 'src/example_launcher.dart';
+import 'src/example_benchmark.dart';
+import 'src/example_flame.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,10 +11,8 @@ void main() {
   Flame.device.fullScreen();
   Flame.device.setLandscape();
 
-  runApp(
-    GameWidget(
-      //game: ExampleLauncher(),
-      game: ExampleBenchmark(),
-    ),
-  );
+  runApp(GameWidget(
+    //game: ExampleFlame(),
+    game: ExampleBenchmark(),
+  ));
 }

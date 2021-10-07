@@ -33,8 +33,7 @@ class RotationComponent extends Component {
   @override
   void update(double deltaTime, BaseObject parent) {
     if (parent is SceneObject && parent.isVisible) {
-      angle += velocity * deltaTime;
-      //angle %= twoPi;
+      angle = radRound(angle + velocity * deltaTime);
       sprite?.rotation = angle + angleOffset;
     }
   }

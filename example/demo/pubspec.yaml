@@ -10,8 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
   vector_math: '>=2.1.0 <3.0.0'
-  composition_rendering: ^0.3.0
-  flame_composition_rendering: ^0.1.0-dev.5
+  composition_rendering: ^0.3.1
+  flame_composition_rendering: ^0.1.0-dev.6
 
 dev_dependencies:
   flutter_test:
