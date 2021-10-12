@@ -5,7 +5,7 @@ import '../graphics/colors.dart';
 import '../graphics/drawable_text.dart';
 
 class TextComponent extends Component with Dirty {
-  static final TextStyle defaultTextStyle = TextStyle(
+  static const TextStyle defaultTextStyle = TextStyle(
     color: Colors.whiteColor,
     fontSize: 11,
   );
@@ -45,9 +45,7 @@ class TextComponent extends Component with Dirty {
           text: text,
           style: _textStyle,
         );
-        systems.debugSystem.startTextLayout();
         _textPainter.layout();
-        systems.debugSystem.stopTextLayout();
       }
     }
   }

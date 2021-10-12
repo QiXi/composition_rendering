@@ -119,11 +119,9 @@ class RenderSystem with Registry {
   }
 
   void render(Canvas canvas) {
-    systems.debugSystem.startRender();
     _renderQueue.commitUpdates();
     _draw(canvas);
     _renderQueue.releaseAll();
-    systems.debugSystem.stopRender();
   }
 
   @override

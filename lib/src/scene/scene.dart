@@ -7,9 +7,7 @@ abstract class Scene extends BaseObject with Registry {
   void init();
 
   void updateScene(double deltaTime) {
-    systems.debugSystem.startUpdate();
     _sceneManager.update(deltaTime, this);
-    systems.debugSystem.stopUpdate();
   }
 
   int get count => _sceneManager.count;
