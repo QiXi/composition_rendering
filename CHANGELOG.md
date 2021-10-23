@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 0.4.0 (2021-10-24)
+* Added `GameWidget`
+
 ## 0.3.1 (2021-10-05)
 * Performance optimization
 
